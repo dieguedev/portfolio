@@ -52,7 +52,7 @@ const menuItems = [
   </a>
 
   <button
-    class="menu-mobile flex items-center gap-2 rounded-xl px-3 py-2 text-white/80 transition-colors hover:bg-white/[0.12] hover:text-white"
+    class="flex items-center gap-2 rounded-xl px-3 py-2 text-white/80 transition-colors hover:bg-white/[0.12] hover:text-white sm:hidden"
     type="button"
     aria-label="Abrir menú"
   >
@@ -60,7 +60,7 @@ const menuItems = [
     <MenuIcon width={24} height={24} fill="currentColor" aria-hidden="true" />
   </button>
 
-  <ul class="menu-desktop hidden gap-2">
+  <ul class="hidden gap-2 sm:flex">
     {
       menuItems.map(({ id, label, Icon }) => (
         <li>
@@ -143,23 +143,3 @@ const menuItems = [
     if (section) observer.observe(section);
   });
 </script>
-
-<style>
-  @media (width < 36rem) {
-    .menu-mobile {
-      display: flex;
-    }
-  }
-
-  @media (width >= 36rem) {
-    .menu-mobile {
-      display: none;
-    }
-  }
-
-  @media (width >= 64rem) {
-    .menu-desktop {
-      display: flex;
-    }
-  }
-</style>
