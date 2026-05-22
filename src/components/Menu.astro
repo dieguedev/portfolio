@@ -1,0 +1,165 @@
+---
+import {
+  At,
+  BriefcaseAlt2,
+  HomeAlt2,
+  InfoCircle,
+  Menu as MenuIcon,
+} from "@boxicons/react";
+import logo from "../assets/logo.svg";
+
+const menuItems = [
+  {
+    id: "home",
+    label: "Inicio",
+    Icon: HomeAlt2,
+  },
+  {
+    id: "about",
+    label: "Acerca de",
+    Icon: InfoCircle,
+  },
+  {
+    id: "work",
+    label: "Trabajo",
+    Icon: BriefcaseAlt2,
+  },
+  {
+    id: "contact",
+    label: "Contacto",
+    Icon: At,
+  },
+] as const;
+---
+
+<nav
+  class="glassmorphism fixed left-1/2 top-8 z-50 inline-flex w-[85dvw] -translate-x-1/2 items-center justify-between rounded-2xl bg-white/[0.08] px-4 py-2 text-white/65 md:w-[75dvw]"
+  aria-label="Navegación principal"
+>
+  <a
+    href="#home"
+    aria-label="Ir a inicio"
+    class="rounded-xl p-1 transition-colors hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50"
+  >
+    <img
+      src={logo.src}
+      width="48"
+      height="48"
+      alt=""
+      aria-hidden="true"
+      class="brightness-0 invert"
+    />
+  </a>
+
+  <button
+    class="menu-mobile flex items-center gap-2 rounded-xl px-3 py-2 text-white/80 transition-colors hover:bg-white/[0.12] hover:text-white"
+    type="button"
+    aria-label="Abrir menú"
+  >
+    <span class="text-sm">Menu</span>
+    <MenuIcon width={24} height={24} fill="currentColor" aria-hidden="true" />
+  </button>
+
+  <ul class="menu-desktop hidden gap-2">
+    {
+      menuItems.map(({ id, label, Icon }) => (
+        <li>
+          <a
+            href={`#${id}`}
+            data-section-link={id}
+            aria-current={id === "home" ? "page" : undefined}
+            class="flex min-w-16 flex-col items-center justify-center gap-1 rounded-xl border border-transparent px-3 py-2 text-xs font-medium text-white/75 transition-colors duration-200 hover:bg-white/[0.08] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50 aria-[current=page]:bg-white/[0.08] aria-[current=page]:text-white aria-[current=page]:shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+          >
+            <Icon
+              width={22}
+              height={22}
+              fill="currentColor"
+              aria-hidden="true"
+            />
+            <span>{label}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"),
+  ];
+
+  const sectionIds = links
+    .map((link) => link.dataset.sectionLink)
+    .filter((id): id is string => Boolean(id));
+  const isSectionId = (value: string): boolean => sectionIds.includes(value);
+
+  const setActiveSection = (id: string): void => {
+    links.forEach((link) => {
+      const isActive = link.dataset.sectionLink === id;
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+        return;
+      }
+      link.removeAttribute("aria-current");
+    });
+  };
+
+  const updateFromHash = (): void => {
+    const hash = window.location.hash.replace("#", "");
+    setActiveSection(isSectionId(hash) ? hash : "home");
+  };
+
+  updateFromHash();
+  window.addEventListener("hashchange", updateFromHash);
+
+  const visibleSections = new Map<string, number>();
+  const observer = new IntersectionObserver(
+    (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSections.set(entry.target.id, entry.intersectionRatio);
+          return;
+        }
+        visibleSections.delete(entry.target.id);
+      });
+
+      const mostVisibleSection = [...visibleSections.entries()].sort(
+        (a, b) => b[1] - a[1],
+      )[0]?.[0];
+
+      if (mostVisibleSection && isSectionId(mostVisibleSection)) {
+        setActiveSection(mostVisibleSection);
+      }
+    },
+    {
+      rootMargin: "-35% 0px -45% 0px",
+      threshold: [0.15, 0.3, 0.45, 0.6],
+    },
+  );
+
+  sectionIds.forEach((id) => {
+    const section = document.getElementById(id);
+    if (section) observer.observe(section);
+  });
+</script>
+
+<style>
+  @media (width < 36rem) {
+    .menu-mobile {
+      display: flex;
+    }
+  }
+
+  @media (width >= 36rem) {
+    .menu-mobile {
+      display: none;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .menu-desktop {
+      display: flex;
+    }
+  }
+</style>

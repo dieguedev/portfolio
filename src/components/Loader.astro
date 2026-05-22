@@ -1,0 +1,60 @@
+---
+interface Props {
+  spinningIcon: string;
+  centerIcon: string;
+  size?: number;
+  rotationDuration?: number;
+}
+
+const {
+  spinningIcon,
+  centerIcon,
+  size = 128,
+  rotationDuration = 10,
+} = Astro.props;
+---
+
+<div
+  class="loader"
+  style={`--loader-size: ${size}px; --loader-duration: ${rotationDuration}s;`}
+  aria-hidden="true"
+>
+  <img class="loader__spin" src={spinningIcon} alt="" />
+  <img class="loader__center" src={centerIcon} alt="" />
+</div>
+
+<style>
+  .loader {
+    position: relative;
+    display: flex;
+    width: var(--loader-size);
+    height: var(--loader-size);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loader__spin,
+  .loader__center {
+    position: absolute;
+    object-fit: contain;
+  }
+
+  .loader__spin {
+    width: 100%;
+    height: 100%;
+    animation: loader-spin var(--loader-duration) linear infinite;
+  }
+
+  .loader__center {
+    z-index: 1;
+    width: 75%;
+    height: 75%;
+    filter: brightness(0) invert(1);
+  }
+
+  @keyframes loader-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

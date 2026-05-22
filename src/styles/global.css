@@ -1,0 +1,63 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/montserrat";
+@import "@fontsource/cormorant-garamond/latin-600-italic.css";
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Montserrat Variable", "Inter Variable", sans-serif;
+  --font-heading: var(--font-sans);
+  --font-display: "Cormorant Garamond", serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --breakpoint-sm: 36rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 90rem;
+  --breakpoint-2xl: 120rem;
+}
+
+:root {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --ring: oklch(0.556 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+}
+
+html {
+  font-family:
+    "Montserrat Variable",
+    "Inter Variable",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  background: #000;
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: #000;
+  color: #fff;
+}
+
+canvas {
+  display: block;
+}
+
+@layer utilities {
+  .glassmorphism {
+    @apply border border-white/20 bg-white/[0.11] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5.2px];
+  }
+}

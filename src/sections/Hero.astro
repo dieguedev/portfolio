@@ -1,0 +1,63 @@
+---
+import HeroBackground from '../components/ui/HeroBackground';
+import Loader from '../components/Loader.astro';
+import diegue from '../assets/diegue.svg';
+import logo from '../assets/logo.svg';
+---
+
+<section
+  id="home"
+  class="relative flex h-dvh flex-col items-center justify-center overflow-hidden bg-black"
+  aria-labelledby="home-title"
+>
+  <div class="absolute inset-0 z-0">
+    <HeroBackground
+      client:load
+      waveColor={[0.42, 0.42, 0.42]}
+      disableAnimation={false}
+      enableMouseInteraction={true}
+      mouseRadius={0.12}
+      colorNum={4}
+      pixelSize={2}
+      waveAmplitude={0.3}
+      waveFrequency={3}
+      waveSpeed={0.05}
+    />
+  </div>
+
+  <div class="absolute inset-0 z-[1] bg-black/45"></div>
+
+  <div class="relative z-10 mx-auto flex w-full max-w-[920px] flex-col items-center px-6 text-center text-white">
+    <h1 id="home-title" class="sr-only">
+      Diegue, desarrollador web en Pamplona
+    </h1>
+    <p
+      class="mb-3 text-xs font-medium uppercase tracking-[0.28em] text-white/60 sm:text-sm"
+      aria-hidden="true"
+    >
+      DESARROLLADOR FRONTEND
+    </p>
+    <div
+      class="text-[clamp(3.5rem,15vw,8.5rem)] font-semibold leading-[0.9] tracking-normal text-white drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)] sm:mb-4"
+      aria-hidden="true"
+    >
+      <span class="italic">hola, soy</span>
+      <span class="font-display text-[1.12em] font-semibold italic">
+        diegue
+      </span>
+    </div>
+    <p class="mt-5 max-w-[32rem] text-sm font-normal leading-6 text-white/80 sm:text-base sm:leading-7">
+      Construyo experiencias web rápidas y accesibles utilizando React,
+      Typescript y una gran atención al detalle.
+    </p>
+  </div>
+
+  <div class="absolute bottom-20 z-10">
+    <Loader
+      spinningIcon={diegue.src}
+      centerIcon={logo.src}
+      rotationDuration={10}
+      size={64}
+    />
+  </div>
+</section>
