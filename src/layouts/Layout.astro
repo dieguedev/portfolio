@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import montserratUrl from "@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url";
+import cormorantUrl from "@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2?url";
 
 interface Props {
   title?: string;
@@ -23,6 +25,9 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+
+    <link rel="preload" href={montserratUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={cormorantUrl} as="font" type="font/woff2" crossorigin />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
