@@ -32,6 +32,8 @@ export default function ClickSpark({
 }: ClickSparkProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
+  const animationIdRef = useRef<number>(0);
+  const drawRef = useRef<((timestamp: number) => void) | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -97,8 +99,6 @@ export default function ClickSpark({
       return;
     }
 
-    let animationId: number;
-
     const draw = (timestamp: number) => {
       const dpr = window.devicePixelRatio || 1;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -129,13 +129,21 @@ export default function ClickSpark({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      if (sparksRef.current.length > 0) {
+        animationIdRef.current = requestAnimationFrame(draw);
+      } else {
+        animationIdRef.current = 0;
+      }
     };
 
-    animationId = requestAnimationFrame(draw);
+    drawRef.current = draw;
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+        animationIdRef.current = 0;
+      }
+      drawRef.current = null;
     };
   }, [
     duration,
@@ -165,6 +173,10 @@ export default function ClickSpark({
     }));
 
     sparksRef.current.push(...sparks);
+
+    if (animationIdRef.current === 0 && drawRef.current) {
+      animationIdRef.current = requestAnimationFrame(drawRef.current);
+    }
   };
 
   return (
