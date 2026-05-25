@@ -6,6 +6,10 @@ import Hero from "../sections/Hero.astro";
 ---
 
 <Layout>
+  <main class="min-h-dvh bg-black text-white">
+    <Menu />
+    <Hero />
+  </main>
   <ClickSpark
     client:idle
     sparkColor="#fff"
@@ -13,10 +17,5 @@ import Hero from "../sections/Hero.astro";
     sparkRadius={18}
     sparkCount={8}
     duration={420}
-  >
-    <main class="min-h-dvh bg-black text-white">
-      <Menu />
-      <Hero />
-    </main>
-  </ClickSpark>
+  />
 </Layout>
