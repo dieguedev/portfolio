@@ -194,6 +194,7 @@ export default function HeroBackground() {
       camera={{ position: [0, 0, 6] }}
       frameloop="always"
       dpr={1}
+      style={{ pointerEvents: "none" }}
     >
       <DitheredWaves />
     </Canvas>
