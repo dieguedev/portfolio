@@ -1,21 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Menu from "../components/Menu.astro";
-import ClickSpark from "../components/ui/ClickSpark";
 import Hero from "../sections/Hero.astro";
 ---
 
 <Layout>
   <main class="min-h-dvh bg-black text-white">
-    <Menu />
     <Hero />
   </main>
-  <ClickSpark
-    client:idle
-    sparkColor="#fff"
-    sparkSize={10}
-    sparkRadius={18}
-    sparkCount={8}
-    duration={420}
-  />
 </Layout>
