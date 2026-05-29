@@ -7,10 +7,10 @@ import logo from "../assets/logo.svg";
 
 <section
   id="home"
-  class="relative flex h-dvh flex-col items-center justify-center overflow-hidden bg-black"
+  class="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-black"
   aria-labelledby="home-title"
 >
-  <div class="absolute inset-0 z-0">
+  <div class="absolute inset-0 z-0" aria-hidden="true">
     <HeroBackground client:idle />
   </div>
 
@@ -41,11 +41,11 @@ import logo from "../assets/logo.svg";
       class="mt-5 max-w-[32rem] text-sm font-normal leading-6 text-white/80 sm:text-base sm:leading-7"
     >
       Construyo experiencias web rápidas y accesibles utilizando React,
-      Typescript y una gran atención al detalle.
+      TypeScript y una gran atención al detalle.
     </p>
   </div>
 
-  <div class="absolute bottom-20 z-10">
+  <div class="absolute bottom-20 z-10" aria-hidden="true">
     <Loader
       spinningIcon={diegue.src}
       centerIcon={logo.src}
