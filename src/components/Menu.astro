@@ -168,14 +168,22 @@ const isActive = (href: string) =>
 </style>
 
 <script>
-  const toggle = document.getElementById(
-    "mobile-menu-toggle",
-  ) as HTMLButtonElement | null;
-  const overlay = document.getElementById(
-    "mobile-menu-overlay",
-  ) as HTMLElement | null;
+  let menuController: AbortController | null = null;
 
-  if (toggle && overlay) {
+  function initMenu() {
+    menuController?.abort();
+    menuController = new AbortController();
+    const { signal } = menuController;
+
+    const toggle = document.getElementById(
+      "mobile-menu-toggle",
+    ) as HTMLButtonElement | null;
+    const overlay = document.getElementById(
+      "mobile-menu-overlay",
+    ) as HTMLElement | null;
+
+    if (!toggle || !overlay) return;
+
     const labelOpen = toggle.querySelector<HTMLElement>("[data-label-open]");
     const labelClose = toggle.querySelector<HTMLElement>("[data-label-close]");
     let isOpen = false;
@@ -204,10 +212,11 @@ const isActive = (href: string) =>
       document.body.style.overflow = "";
     };
 
-    toggle.addEventListener("click", () => (isOpen ? closeMenu() : openMenu()));
-
+    toggle.addEventListener("click", () => (isOpen ? closeMenu() : openMenu()), { signal });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && isOpen) closeMenu();
-    });
+    }, { signal });
   }
+
+  document.addEventListener("astro:page-load", initMenu);
 </script>
