@@ -24,7 +24,7 @@ const values = [
 <Layout title="Diegue | Acerca de">
   <main class="min-h-dvh bg-black text-white">
     <section
-      class="mx-auto max-w-[920px] px-6 pb-28 pt-40"
+      class="mx-auto max-w-[920px] px-6 pb-16 pt-40"
       aria-labelledby="about-title"
     >
       <!-- Header -->
@@ -160,35 +160,43 @@ const values = [
           </div>
         </div>
       </div>
-
-      <!-- CTA -->
-      <div class="glassmorphism rounded-2xl p-8">
-        <h2
-          class="mb-3 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
-        >
-          ¿Hablamos?
-        </h2>
-        <p class="mb-6 max-w-md text-base leading-7 text-white/80">
-          Si tienes un proyecto interesante o simplemente quieres charlar sobre
-          web, no dudes en escribirme.
-        </p>
-        <a
-          href="/contact"
-          class="glassmorphism inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium text-white/75 transition-colors duration-200 hover:bg-white/[0.12] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50"
-        >
-          Contactar
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-          </svg>
-        </a>
-      </div>
     </section>
+
+    <!-- CTA Banner full-width bleed -->
+    <div
+      class="border-t border-white/[0.08] px-6 py-24 text-center"
+      style="background: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(255,255,255,0.13) 0%, transparent 100%)"
+    >
+      <div class="mx-auto max-w-[920px]">
+        <p
+          class="text-xs font-medium uppercase tracking-[0.28em] text-white/40"
+        >
+          No lo pienses más
+        </p>
+        <h2
+          class="mb-5 text-[clamp(2.5rem,8vw,5rem)] font-semibold font-display leading-[0.92] text-white"
+        >
+          ¿Listo para empezar?
+        </h2>
+        <p class="mx-auto mb-10 max-w-sm text-base leading-7 text-white/55">
+          Cuéntame tu proyecto y lo convertimos en realidad.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity duration-200 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50"
+          >
+            Contactar
+          </a>
+          <a
+            href="/work"
+            class="glassmorphism inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white/70 transition-colors duration-200 hover:bg-white/[0.12] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50"
+          >
+            Ver trabajo
+          </a>
+        </div>
+      </div>
+    </div>
   </main>
 </Layout>
 
