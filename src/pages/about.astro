@@ -28,7 +28,7 @@ const values = [
       aria-labelledby="about-title"
     >
       <!-- Header -->
-      <div class="mb-16">
+      <div class="mb-8 md:mb-12">
         <h1
           class="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
           aria-hidden="true"
@@ -64,7 +64,7 @@ const values = [
       </blockquote>
 
       <!-- Tech marquee: scroll-jacked con GSAP -->
-      <div id="tech-section" class="mb-16">
+      <div id="tech-section">
         <p
           class="mb-8 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
         >
@@ -79,7 +79,7 @@ const values = [
             {
               [...techs, ...techs].map((name, i) => (
                 <li
-                  class="flex shrink-0 flex-col items-center gap-3"
+                  class="flex shrink-0 flex-col items-center gap-3 text-center"
                   aria-hidden={i >= techs.length ? "true" : undefined}
                 >
                   <At
@@ -169,7 +169,7 @@ const values = [
     >
       <div class="mx-auto max-w-[920px]">
         <p
-          class="text-xs font-medium uppercase tracking-[0.28em] text-white/40"
+          class="text-xs font-medium uppercase tracking-[0.14em] md:tracking-[0.28em] text-white/40 mb-2 md:mb-0"
         >
           No lo pienses más
         </p>
@@ -220,25 +220,51 @@ const values = [
     });
 
     const translateEnd = track.scrollWidth / 2;
-    let acc = 0;
 
     gsap.set(track, { x: 0 });
 
-    // GSAP anima suavemente hacia el target acumulado
+    const isMobile = window.matchMedia("(pointer: coarse)").matches;
+
+    if (isMobile) {
+      gsap.to(track, {
+        x: -translateEnd,
+        duration: translateEnd / 60,
+        ease: "none",
+        repeat: -1,
+      });
+      cleanup = () => {
+        gsap.killTweensOf(track);
+      };
+      return;
+    }
+
+    // Desktop: scroll-jack
+    const scrollTrigger = Math.max(
+      0,
+      section.getBoundingClientRect().top +
+        window.scrollY +
+        section.offsetHeight / 2 -
+        window.innerHeight / 2,
+    );
+    let acc = 0;
+
     const moveTo = gsap.quickTo(track, "x", {
       duration: 0.5,
       ease: "power2.out",
     });
 
     function onWheel(e: WheelEvent) {
-      if (window.scrollY > 0) return;
-
       let dy = e.deltaY;
       if (e.deltaMode === 1) dy *= 40;
       if (e.deltaMode === 2) dy *= window.innerHeight;
 
-      if (dy > 0 && acc >= translateEnd) return;
-      if (dy < 0 && acc <= 0) return;
+      if (dy > 0) {
+        if (window.scrollY < scrollTrigger) return;
+        if (acc >= translateEnd) return;
+      } else {
+        if (window.scrollY > scrollTrigger) return;
+        if (acc <= 0) return;
+      }
 
       e.preventDefault();
       acc = Math.min(translateEnd, Math.max(0, acc + dy));
