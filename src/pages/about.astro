@@ -27,7 +27,6 @@ const values = [
       class="mx-auto max-w-[920px] px-6 pb-28 pt-40"
       aria-labelledby="about-title"
     >
-
       <!-- Header -->
       <div class="mb-16">
         <h1
@@ -48,45 +47,62 @@ const values = [
 
       <!-- Bio -->
       <blockquote class="mb-16 border-l-[3px] border-l-white/40 pl-6">
-        <p class="text-base leading-7 text-white/80 sm:text-[1.05rem] sm:leading-8">
-          Desarrollador web en <strong class="font-semibold text-white">Pamplona</strong>
+        <p
+          class="text-base leading-7 text-white/80 sm:text-[1.05rem] sm:leading-8"
+        >
+          Desarrollador web en <strong class="font-semibold text-white"
+            >Pamplona</strong
+          >
           especializado en React y TypeScript. Creo experiencias web rápidas, accesibles
-          y bien diseñadas para <strong class="font-semibold text-white">empresas, startups y profesionales</strong>
-          que buscan una <strong class="font-semibold text-white">presencia digital sólida.</strong>
+          y bien diseñadas para <strong class="font-semibold text-white"
+            >empresas, startups y profesionales</strong
+          >
+          que buscan una <strong class="font-semibold text-white"
+            >presencia digital sólida.</strong
+          >
         </p>
       </blockquote>
 
       <!-- Tech marquee: scroll-jacked con GSAP -->
       <div id="tech-section" class="mb-16">
-        <p class="mb-8 text-xs font-medium uppercase tracking-[0.28em] text-white/50">
+        <p
+          class="mb-8 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
+        >
           Tecnologías
         </p>
-        <div class="overflow-hidden">
+        <div class="overflow-hidden -mx-6 sm:mx-0">
           <ul
             id="marquee-track"
-            class="flex gap-20 will-change-transform"
+            class="flex will-change-transform"
             aria-label="Listado de tecnologías"
           >
-              {
-                [...techs, ...techs].map((name, i) => (
-                  <li
-                    class="flex shrink-0 flex-col items-center gap-3"
-                    aria-hidden={i >= techs.length ? "true" : undefined}
-                  >
-                    <At width={38} height={38} fill="currentColor" aria-hidden="true" />
-                    <span class="text-xs font-medium uppercase tracking-[0.28em] text-white/50">
-                      {name}
-                    </span>
-                  </li>
-                ))
-              }
-            </ul>
+            {
+              [...techs, ...techs].map((name, i) => (
+                <li
+                  class="flex shrink-0 flex-col items-center gap-3"
+                  aria-hidden={i >= techs.length ? "true" : undefined}
+                >
+                  <At
+                    width={38}
+                    height={38}
+                    fill="currentColor"
+                    aria-hidden="true"
+                  />
+                  <span class="text-xs font-medium uppercase tracking-[0.28em] text-white/50">
+                    {name}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
 
       <!-- Enfoque -->
       <div class="glassmorphism mb-6 rounded-2xl p-8">
-        <h2 class="mb-6 text-xs font-medium uppercase tracking-[0.28em] text-white/50">
+        <h2
+          class="mb-6 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
+        >
           Enfoque
         </h2>
         <ul class="space-y-4" aria-label="Listado de valores">
@@ -106,12 +122,16 @@ const values = [
 
       <!-- Currently -->
       <div class="glassmorphism mb-6 rounded-2xl p-8">
-        <h2 class="mb-6 text-xs font-medium uppercase tracking-[0.28em] text-white/50">
+        <h2
+          class="mb-6 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
+        >
           Actualmente
         </h2>
         <div class="grid gap-6 sm:grid-cols-3">
           <div>
-            <p class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40">
+            <p
+              class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40"
+            >
               Trabajando en
             </p>
             <p class="text-sm font-medium text-white/80">
@@ -119,7 +139,9 @@ const values = [
             </p>
           </div>
           <div>
-            <p class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40">
+            <p
+              class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40"
+            >
               Aprendiendo
             </p>
             <p class="text-sm font-medium text-white/80">
@@ -127,7 +149,9 @@ const values = [
             </p>
           </div>
           <div>
-            <p class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40">
+            <p
+              class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40"
+            >
               Interesado en
             </p>
             <p class="text-sm font-medium text-white/80">
@@ -139,7 +163,9 @@ const values = [
 
       <!-- CTA -->
       <div class="glassmorphism rounded-2xl p-8">
-        <h2 class="mb-3 text-xs font-medium uppercase tracking-[0.28em] text-white/50">
+        <h2
+          class="mb-3 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
+        >
           ¿Hablamos?
         </h2>
         <p class="mb-6 max-w-md text-base leading-7 text-white/80">
@@ -151,12 +177,17 @@ const values = [
           class="glassmorphism inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium text-white/75 transition-colors duration-200 hover:bg-white/[0.12] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50"
         >
           Contactar
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
             <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
           </svg>
         </a>
       </div>
-
     </section>
   </main>
 </Layout>
@@ -171,7 +202,14 @@ const values = [
 
     const section = document.getElementById("tech-section");
     const track = document.getElementById("marquee-track");
-    if (!section || !track) return;
+    const container = track?.parentElement as HTMLElement | null;
+    if (!section || !track || !container) return;
+
+    const N = window.innerWidth < 640 ? 3 : 6;
+    const itemWidth = container.offsetWidth / N;
+    track.querySelectorAll<HTMLElement>("li").forEach((li) => {
+      li.style.width = `${itemWidth}px`;
+    });
 
     const translateEnd = track.scrollWidth / 2;
     let acc = 0;
