@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Menu from "../components/Menu.astro";
 import ClickSpark from "../components/ui/ClickSpark";
+import { ClientRouter } from "astro:transitions";
 import montserratUrl from "@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url";
 import cormorantUrl from "@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2?url";
 
@@ -18,7 +19,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -48,12 +49,14 @@ const {
     <link rel="icon" href="/favicon.ico" />
 
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body>
     <Menu />
     <slot />
     <ClickSpark
       client:idle
+      transition:persist
       sparkColor="#fff"
       sparkSize={10}
       sparkRadius={18}
