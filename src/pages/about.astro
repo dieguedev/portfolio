@@ -1,6 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import TechMarquee from "../components/TechMarquee.astro";
+import starUrl from "../assets/star.svg?url";
+
+const experiencia = [
+  { role: "Front-end Developer", company: "JAKALA Iberia", period: "Ene. 24 — hoy." },
+  { role: "Front-end Developer", company: "Biko",          period: "Jul. 23 — Ene. 24." },
+  { role: "Developer Trainee",   company: "Biko",          period: "Mar. 23 — Jul. 23." },
+];
 import {
   TypescriptIcon,
   _React,
@@ -70,6 +77,58 @@ const tecnologias = [
 
       <div id="tech-section">
         <TechMarquee tecnologias={tecnologias} />
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[920px] px-6 pt-4 pb-20" aria-label="Experiencia">
+      <div class="relative">
+        <div class="absolute left-5 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-white/[0.15]" />
+
+        {experiencia.map((job, i) => {
+          const isLeft = i % 2 === 0;
+          return (
+            <div class="py-10 md:py-14">
+
+              {/* Mobile */}
+              <div class="grid grid-cols-[40px_1fr] items-center gap-x-5 md:hidden">
+                <div class="flex justify-center relative z-10">
+                  <img src={starUrl} class="w-9 h-auto" alt="" aria-hidden="true" />
+                </div>
+                <div>
+                  <p class="text-xs text-white/40 mb-1 tabular-nums">{job.period}</p>
+                  <p class="text-base font-bold text-white leading-tight">{job.role}</p>
+                  <p class="text-sm text-white/55 mt-0.5">{job.company}</p>
+                </div>
+              </div>
+
+              {/* Desktop */}
+              <div class="hidden md:grid md:grid-cols-[1fr_80px_1fr] items-center">
+                <div class={isLeft ? "text-right pr-10" : ""}>
+                  {isLeft && (
+                    <>
+                      <p class="text-xs text-white/40 mb-2 tabular-nums">{job.period}</p>
+                      <p class="text-lg font-bold text-white leading-tight">{job.role}</p>
+                      <p class="text-sm text-white/55 mt-1">{job.company}</p>
+                    </>
+                  )}
+                </div>
+                <div class="relative z-10">
+                  <img src={starUrl} class="w-12 h-auto block mx-auto translate-x-[4px]" alt="" aria-hidden="true" />
+                </div>
+                <div class={!isLeft ? "pl-10" : ""}>
+                  {!isLeft && (
+                    <>
+                      <p class="text-xs text-white/40 mb-2 tabular-nums">{job.period}</p>
+                      <p class="text-lg font-bold text-white leading-tight">{job.role}</p>
+                      <p class="text-sm text-white/55 mt-1">{job.company}</p>
+                    </>
+                  )}
+                </div>
+              </div>
+
+            </div>
+          );
+        })}
       </div>
     </section>
 
