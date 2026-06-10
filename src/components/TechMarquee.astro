@@ -1,0 +1,126 @@
+---
+import type { ComponentType } from "react";
+
+interface Tech {
+  name: string;
+  icon: ComponentType<{ width: number; height: number; fill: string; "aria-hidden": "true" }>;
+}
+
+interface Props {
+  tecnologias: Tech[];
+}
+
+const { tecnologias } = Astro.props;
+---
+
+<div class="overflow-hidden -mx-6 sm:mx-0">
+  <ul
+    id="marquee-track"
+    data-count={tecnologias.length}
+    class="flex will-change-transform"
+    aria-label="Listado de tecnologías"
+  >
+    {
+      [...tecnologias, ...tecnologias].map((tech, i) => (
+        <li
+          class="flex shrink-0 flex-col items-center gap-3 text-center"
+          aria-hidden={i >= tecnologias.length ? "true" : undefined}
+        >
+          <tech.icon
+            width={38}
+            height={38}
+            fill="currentColor"
+            aria-hidden="true"
+          />
+          <span class="text-xs font-medium uppercase tracking-[0.28em] text-white/50">
+            {tech.name}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  let cleanup: (() => void) | null = null;
+
+  function initMarquee() {
+    cleanup?.();
+
+    const section = document.getElementById("tech-section");
+    const track = document.getElementById("marquee-track");
+    const container = track?.parentElement as HTMLElement | null;
+    if (!section || !track || !container) return;
+
+    const N = window.innerWidth < 640 ? 3 : 6;
+    const itemWidth = container.offsetWidth / N;
+    track.querySelectorAll<HTMLElement>("li").forEach((li) => {
+      li.style.width = `${itemWidth}px`;
+    });
+
+    const count = parseInt(track.dataset.count ?? "0");
+    const translateEndMobile = track.scrollWidth / 2;
+    const translateEndDesktop = (count - N) * itemWidth;
+
+    gsap.set(track, { x: 0 });
+
+    const isMobile = window.matchMedia("(pointer: coarse)").matches;
+
+    if (isMobile) {
+      gsap.to(track, {
+        x: -translateEndMobile,
+        duration: translateEndMobile / 60,
+        ease: "none",
+        repeat: -1,
+      });
+      cleanup = () => {
+        gsap.killTweensOf(track);
+      };
+      return;
+    }
+
+    const scrollTrigger = Math.max(
+      0,
+      section.getBoundingClientRect().top +
+        window.scrollY +
+        section.offsetHeight / 2 -
+        window.innerHeight / 2,
+    );
+    let acc = 0;
+
+    const moveTo = gsap.quickTo(track, "x", {
+      duration: 0.5,
+      ease: "power2.out",
+    });
+
+    function onWheel(e: WheelEvent) {
+      let dy = e.deltaY;
+      if (e.deltaMode === 1) dy *= 40;
+      if (e.deltaMode === 2) dy *= window.innerHeight;
+
+      if (dy > 0) {
+        if (window.scrollY < scrollTrigger) return;
+        if (acc >= translateEndDesktop) return;
+      } else {
+        if (window.scrollY > scrollTrigger) return;
+        if (acc <= 0) return;
+      }
+
+      e.preventDefault();
+      acc = Math.min(translateEndDesktop, Math.max(0, acc + dy));
+      moveTo(-acc);
+    }
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+
+    cleanup = () => {
+      window.removeEventListener("wheel", onWheel);
+      gsap.killTweensOf(track);
+    };
+  }
+
+  document.addEventListener("astro:page-load", initMarquee);
+  document.addEventListener("astro:before-swap", () => cleanup?.());
+</script>
