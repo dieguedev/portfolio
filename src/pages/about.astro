@@ -1,23 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TechMarquee from "../components/TechMarquee.astro";
 import { At } from "@boxicons/react";
 
-const techs = [
-  "React",
-  "TypeScript",
-  "Next.js",
-  "Astro",
-  "Tailwind CSS",
-  "Vite",
-  "Node.js",
-  "Git",
-];
-
-const values = [
-  "Rendimiento y Core Web Vitals",
-  "Accesibilidad web (WCAG)",
-  "Código limpio y mantenible",
-  "Atención al detalle visual",
+const tecnologias = [
+  { name: "TypeScript", icon: At },
+  { name: "React", icon: At },
+  { name: "Next.js", icon: At },
+  { name: "Tailwind", icon: At },
+  { name: "Supabase", icon: At },
+  { name: "TanStack Query", icon: At },
+  { name: "Jest", icon: At },
+  { name: "Cypress", icon: At },
+  { name: "Testing Library", icon: At },
+  { name: "Astro", icon: At },
 ];
 ---
 
@@ -27,7 +23,6 @@ const values = [
       class="mx-auto max-w-[920px] px-6 pb-16 pt-40"
       aria-labelledby="about-title"
     >
-      <!-- Header -->
       <div class="mb-8 md:mb-12">
         <h1
           class="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
@@ -45,7 +40,6 @@ const values = [
         </p>
       </div>
 
-      <!-- Bio -->
       <blockquote class="mb-16 border-l-[3px] border-l-white/40 pl-6">
         <p
           class="text-base leading-7 text-white/80 sm:text-[1.05rem] sm:leading-8"
@@ -63,106 +57,16 @@ const values = [
         </p>
       </blockquote>
 
-      <!-- Tech marquee: scroll-jacked con GSAP -->
       <div id="tech-section">
         <p
           class="mb-8 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
         >
           Tecnologías
         </p>
-        <div class="overflow-hidden -mx-6 sm:mx-0">
-          <ul
-            id="marquee-track"
-            class="flex will-change-transform"
-            aria-label="Listado de tecnologías"
-          >
-            {
-              [...techs, ...techs].map((name, i) => (
-                <li
-                  class="flex shrink-0 flex-col items-center gap-3 text-center"
-                  aria-hidden={i >= techs.length ? "true" : undefined}
-                >
-                  <At
-                    width={38}
-                    height={38}
-                    fill="currentColor"
-                    aria-hidden="true"
-                  />
-                  <span class="text-xs font-medium uppercase tracking-[0.28em] text-white/50">
-                    {name}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+        <TechMarquee tecnologias={tecnologias} />
       </div>
-
-      <!-- Enfoque
-      <div class="glassmorphism mb-6 rounded-2xl p-8">
-        <h2
-          class="mb-6 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
-        >
-          Enfoque
-        </h2>
-        <ul class="space-y-4" aria-label="Listado de valores">
-          {
-            values.map((item) => (
-              <li class="flex items-start gap-3 text-sm leading-6 text-white/75">
-                <span
-                  class="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-white/40"
-                  aria-hidden="true"
-                />
-                {item}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      Currently
-      <div class="glassmorphism mb-6 rounded-2xl p-8">
-        <h2
-          class="mb-6 text-xs font-medium uppercase tracking-[0.28em] text-white/50"
-        >
-          Actualmente
-        </h2>
-        <div class="grid gap-6 sm:grid-cols-3">
-          <div>
-            <p
-              class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40"
-            >
-              Trabajando en
-            </p>
-            <p class="text-sm font-medium text-white/80">
-              Proyectos freelance y personales
-            </p>
-          </div>
-          <div>
-            <p
-              class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40"
-            >
-              Aprendiendo
-            </p>
-            <p class="text-sm font-medium text-white/80">
-              Animaciones avanzadas con Motion
-            </p>
-          </div>
-          <div>
-            <p
-              class="mb-1 text-[0.7rem] uppercase tracking-widest text-white/40"
-            >
-              Interesado en
-            </p>
-            <p class="text-sm font-medium text-white/80">
-              Diseño de sistemas y UX
-            </p>
-          </div>
-        </div>
-      </div> -->
     </section>
 
-    <!-- CTA Banner full-width bleed -->
     <div
       class="border-t border-white/[0.08] px-6 py-24 text-center"
       style="background: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(255,255,255,0.13) 0%, transparent 100%)"
@@ -199,86 +103,3 @@ const values = [
     </div>
   </main>
 </Layout>
-
-<script>
-  import gsap from "gsap";
-
-  let cleanup: (() => void) | null = null;
-
-  function initMarquee() {
-    cleanup?.();
-
-    const section = document.getElementById("tech-section");
-    const track = document.getElementById("marquee-track");
-    const container = track?.parentElement as HTMLElement | null;
-    if (!section || !track || !container) return;
-
-    const N = window.innerWidth < 640 ? 3 : 6;
-    const itemWidth = container.offsetWidth / N;
-    track.querySelectorAll<HTMLElement>("li").forEach((li) => {
-      li.style.width = `${itemWidth}px`;
-    });
-
-    const translateEnd = track.scrollWidth / 2;
-
-    gsap.set(track, { x: 0 });
-
-    const isMobile = window.matchMedia("(pointer: coarse)").matches;
-
-    if (isMobile) {
-      gsap.to(track, {
-        x: -translateEnd,
-        duration: translateEnd / 60,
-        ease: "none",
-        repeat: -1,
-      });
-      cleanup = () => {
-        gsap.killTweensOf(track);
-      };
-      return;
-    }
-
-    // Desktop: scroll-jack
-    const scrollTrigger = Math.max(
-      0,
-      section.getBoundingClientRect().top +
-        window.scrollY +
-        section.offsetHeight / 2 -
-        window.innerHeight / 2,
-    );
-    let acc = 0;
-
-    const moveTo = gsap.quickTo(track, "x", {
-      duration: 0.5,
-      ease: "power2.out",
-    });
-
-    function onWheel(e: WheelEvent) {
-      let dy = e.deltaY;
-      if (e.deltaMode === 1) dy *= 40;
-      if (e.deltaMode === 2) dy *= window.innerHeight;
-
-      if (dy > 0) {
-        if (window.scrollY < scrollTrigger) return;
-        if (acc >= translateEnd) return;
-      } else {
-        if (window.scrollY > scrollTrigger) return;
-        if (acc <= 0) return;
-      }
-
-      e.preventDefault();
-      acc = Math.min(translateEnd, Math.max(0, acc + dy));
-      moveTo(-acc);
-    }
-
-    window.addEventListener("wheel", onWheel, { passive: false });
-
-    cleanup = () => {
-      window.removeEventListener("wheel", onWheel);
-      gsap.killTweensOf(track);
-    };
-  }
-
-  document.addEventListener("astro:page-load", initMarquee);
-  document.addEventListener("astro:before-swap", () => cleanup?.());
-</script>
