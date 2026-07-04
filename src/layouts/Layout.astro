@@ -53,7 +53,9 @@ const {
   </head>
   <body>
     <Menu />
-    <slot />
+    <main class="min-h-dvh bg-black text-white">
+      <slot />
+    </main>
     <ClickSpark
       client:idle
       transition:persist
