@@ -156,17 +156,17 @@ function DitheredWaves() {
   });
 
   useEffect(() => {
+    if (!materialRef.current) return;
     const dpr = gl.getPixelRatio();
-    uniformsRef.current.resolution.value.set(
+    materialRef.current.uniforms.resolution.value.set(
       Math.floor(size.width * dpr),
       Math.floor(size.height * dpr),
     );
   }, [gl, size]);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    uniformsRef.current.time.value = t;
-    if (materialRef.current) materialRef.current.uniforms.time.value = t;
+    if (!materialRef.current) return;
+    materialRef.current.uniforms.time.value = clock.getElapsedTime();
   });
 
   return (
