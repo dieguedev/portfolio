@@ -13,7 +13,7 @@ interface Props {
 const { tecnologias } = Astro.props;
 ---
 
-<div class="overflow-hidden -mx-6 sm:mx-0">
+<div id="tech-marquee" class="overflow-hidden -mx-6 sm:mx-0">
   <ul
     id="marquee-track"
     data-count={tecnologias.length}
@@ -44,10 +44,9 @@ const { tecnologias } = Astro.props;
   function initMarquee() {
     cleanup?.();
 
-    const section = document.getElementById("tech-section");
     const track = document.getElementById("marquee-track");
     const container = track?.parentElement as HTMLElement | null;
-    if (!section || !track || !container) return;
+    if (!track || !container) return;
 
     const N = window.innerWidth < 640 ? 3 : 6;
     const itemWidth = container.offsetWidth / N;
@@ -78,9 +77,9 @@ const { tecnologias } = Astro.props;
 
     const scrollTrigger = Math.max(
       0,
-      section.getBoundingClientRect().top +
+      container.getBoundingClientRect().top +
         window.scrollY +
-        section.offsetHeight / 2 -
+        container.offsetHeight / 2 -
         window.innerHeight / 2,
     );
     let acc = 0;
