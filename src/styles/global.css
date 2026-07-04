@@ -54,8 +54,22 @@ canvas {
   display: block;
 }
 
-@layer utilities {
-  .glassmorphism {
-    @apply border border-white/20 bg-white/[0.11] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5.2px];
-  }
+@utility glassmorphism {
+  @apply border border-white/20 bg-white/[0.11] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5.2px];
+}
+
+@utility eyebrow {
+  @apply text-xs font-medium uppercase tracking-[0.28em] text-white/50;
+}
+
+@utility text-accent {
+  @apply font-display text-[1.12em] font-semibold italic;
+}
+
+@utility button {
+  @apply inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity duration-200 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50;
+}
+
+@utility button-glass {
+  @apply glassmorphism inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white/70 transition-colors duration-200 hover:bg-white/[0.12] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50;
 }
