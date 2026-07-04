@@ -2,12 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import TechMarquee from "../components/TechMarquee.astro";
 import starUrl from "../assets/star.svg?url";
-
-const experiencia = [
-  { role: "Front-end Developer", company: "JAKALA Iberia", period: "Ene. 24 — hoy." },
-  { role: "Front-end Developer", company: "Biko",          period: "Jul. 23 — Ene. 24." },
-  { role: "Developer Trainee",   company: "Biko",          period: "Mar. 23 — Jul. 23." },
-];
 import {
   TypescriptIcon,
   _React,
@@ -21,6 +15,12 @@ import {
   AstroIcon,
 } from "@dev.icons/react/mono";
 import { Linkedin } from "@boxicons/react";
+
+const experiencia = [
+  { role: "Front-end Developer", company: "JAKALA Iberia", period: "Ene. 24 — hoy." },
+  { role: "Front-end Developer", company: "Biko",          period: "Jul. 23 — Ene. 24." },
+  { role: "Developer Trainee",   company: "Biko",          period: "Mar. 23 — Jul. 23." },
+];
 
 const tecnologias = [
   { name: "TypeScript", icon: TypescriptIcon },
@@ -89,26 +89,13 @@ const tecnologias = [
           const isLeft = i % 2 === 0;
           return (
             <div class="grid grid-cols-[1fr_40px_1fr] md:grid-cols-[1fr_80px_1fr] items-center py-10 md:py-14">
-              <div class={isLeft ? "text-right pr-4 md:pr-10" : ""}>
-                {isLeft && (
-                  <>
-                    <p class="text-xs text-white/40 mb-1 tabular-nums">{job.period}</p>
-                    <p class="text-sm md:text-lg font-bold text-white leading-tight">{job.role}</p>
-                    <p class="text-xs md:text-sm text-white/55 mt-0.5">{job.company}</p>
-                  </>
-                )}
+              <div class={isLeft ? "col-start-1 text-right pr-4 md:pr-10" : "col-start-3 pl-4 md:pl-10"}>
+                <p class="text-xs text-white/40 mb-1 tabular-nums">{job.period}</p>
+                <p class="text-sm md:text-lg font-bold text-white leading-tight">{job.role}</p>
+                <p class="text-xs md:text-sm text-white/55 mt-0.5">{job.company}</p>
               </div>
-              <div class="relative z-10 flex justify-center">
+              <div class="col-start-2 relative z-10 flex justify-center">
                 <img src={starUrl} class="w-7 md:w-12 h-auto" alt="" aria-hidden="true" />
-              </div>
-              <div class={!isLeft ? "pl-4 md:pl-10" : ""}>
-                {!isLeft && (
-                  <>
-                    <p class="text-xs text-white/40 mb-1 tabular-nums">{job.period}</p>
-                    <p class="text-sm md:text-lg font-bold text-white leading-tight">{job.role}</p>
-                    <p class="text-xs md:text-sm text-white/55 mt-0.5">{job.company}</p>
-                  </>
-                )}
               </div>
             </div>
           );
