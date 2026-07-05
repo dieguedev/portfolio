@@ -1,5 +1,367 @@
 ---
+export const prerender = false;
+
 import Layout from "../layouts/Layout.astro";
+import { actions, isInputError } from "astro:actions";
+import { Envelope, Linkedin, Whatsapp } from "@boxicons/react";
+
+const result = Astro.getActionResult(actions.contact);
+const inputErrors =
+  result?.error && isInputError(result.error) ? result.error.fields : undefined;
+const serverError =
+  result?.error && !isInputError(result.error) ? result.error.message : undefined;
+const success = !result?.error && result?.data?.success === true;
+
+const CONTACT_EMAIL = "contacto@diegue.dev";
+const whatsappText = encodeURIComponent(
+  "Hola! He visto tu portfolio y me encantaría solicitar más información.",
+);
+const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
 ---
 
-<Layout title="Diegue | Contacto"></Layout>
+<Layout title="Diegue | Contacto">
+  <section
+    class="mx-auto max-w-[920px] px-6 pb-20 pt-40"
+    aria-labelledby="contact-title"
+  >
+    <div class="mb-12 md:mb-16">
+      <h1 class="eyebrow mb-5">Contacto</h1>
+      <p
+        id="contact-title"
+        class="text-[clamp(3rem,12vw,7rem)] font-semibold leading-[0.88] text-white"
+      >
+        <span class="text-accent">Hablemos</span>
+      </p>
+      <p
+        class="mt-6 max-w-lg text-base leading-7 text-white/70 sm:text-[1.05rem] sm:leading-8"
+      >
+        Cuéntame en qué estás pensando y te respondo lo antes posible. Si
+        prefieres, también puedes escribirme directo por cualquiera de estos
+        canales.
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-[1.5fr_1fr] md:items-start">
+      <div class="glassmorphism rounded-2xl p-6 sm:p-8">
+        <form id="contact-form" method="POST" action={actions.contact} novalidate>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="field-name" class="mb-2 block text-sm font-medium text-white/80">
+                Nombre
+              </label>
+              <input
+                id="field-name"
+                name="name"
+                type="text"
+                required
+                minlength="2"
+                maxlength="80"
+                autocomplete="name"
+                aria-invalid={inputErrors?.name ? "true" : "false"}
+                aria-describedby="field-name-error"
+                class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
+              />
+              <p
+                id="field-name-error"
+                role="alert"
+                class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
+              >
+                {inputErrors?.name?.[0] ?? ""}
+              </p>
+            </div>
+
+            <div>
+              <label for="field-email" class="mb-2 block text-sm font-medium text-white/80">
+                Email
+              </label>
+              <input
+                id="field-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                aria-invalid={inputErrors?.email ? "true" : "false"}
+                aria-describedby="field-email-error"
+                class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
+              />
+              <p
+                id="field-email-error"
+                role="alert"
+                class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
+              >
+                {inputErrors?.email?.[0] ?? ""}
+              </p>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="field-subject" class="mb-2 block text-sm font-medium text-white/80">
+                Asunto
+              </label>
+              <input
+                id="field-subject"
+                name="subject"
+                type="text"
+                required
+                minlength="2"
+                maxlength="150"
+                aria-invalid={inputErrors?.subject ? "true" : "false"}
+                aria-describedby="field-subject-error"
+                class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
+              />
+              <p
+                id="field-subject-error"
+                role="alert"
+                class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
+              >
+                {inputErrors?.subject?.[0] ?? ""}
+              </p>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="field-message" class="mb-2 block text-sm font-medium text-white/80">
+                Mensaje
+              </label>
+              <textarea
+                id="field-message"
+                name="message"
+                required
+                minlength="10"
+                maxlength="2000"
+                rows="5"
+                aria-invalid={inputErrors?.message ? "true" : "false"}
+                aria-describedby="field-message-error"
+                class="w-full resize-none rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
+              ></textarea>
+              <p
+                id="field-message-error"
+                role="alert"
+                class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
+              >
+                {inputErrors?.message?.[0] ?? ""}
+              </p>
+            </div>
+          </div>
+
+          <div class="sr-only" aria-hidden="true">
+            <label for="field-botcheck">No rellenar este campo</label>
+            <input
+              id="field-botcheck"
+              type="text"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="mt-6 flex flex-wrap items-center gap-4">
+            <button id="contact-submit" type="submit" class="button">
+              Enviar mensaje
+            </button>
+            <p
+              id="form-status"
+              role="status"
+              aria-live="polite"
+              class="text-sm text-white/70 data-[variant=error]:text-red-300 data-[variant=success]:text-emerald-300"
+              data-variant={success ? "success" : serverError ? "error" : undefined}
+            >
+              {success && "¡Mensaje enviado! Te responderé lo antes posible."}
+              {serverError && (
+                <>
+                  Ha ocurrido un error, inténtalo de nuevo más tarde o
+                  escríbeme directamente a{" "}
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    class="underline underline-offset-2"
+                  >
+                    {CONTACT_EMAIL}
+                  </a>
+                  .
+                </>
+              )}
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <p class="eyebrow">O directamente</p>
+        <a href={`mailto:${CONTACT_EMAIL}`} class="button-glass w-full">
+          <Envelope width={22} height={22} fill="currentColor" aria-hidden="true" />
+          {CONTACT_EMAIL}
+        </a>
+        <a
+          href="https://linkedin.com/in/diego-bogo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button-glass w-full"
+        >
+          <Linkedin width={22} height={22} fill="currentColor" aria-hidden="true" />
+          LinkedIn
+        </a>
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button-glass w-full"
+        >
+          <Whatsapp width={22} height={22} fill="currentColor" aria-hidden="true" />
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { actions, isInputError } from "astro:actions";
+  import {
+    contactSchema,
+    CONTACT_FIELDS,
+    type ContactField,
+  } from "../lib/contact-schema";
+
+  let controller: AbortController | null = null;
+
+  function initContactForm() {
+    controller?.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    if (!form) return;
+
+    const submitBtn = document.getElementById(
+      "contact-submit",
+    ) as HTMLButtonElement | null;
+    const status = document.getElementById("form-status") as HTMLElement | null;
+    const touched = new Set<ContactField>();
+
+    const fieldEl = (name: ContactField) =>
+      form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+    const errorEl = (name: ContactField) =>
+      document.getElementById(`field-${name}-error`);
+
+    function validateField(name: ContactField): boolean {
+      const el = fieldEl(name);
+      const errEl = errorEl(name);
+      if (!el || !errEl) return true;
+
+      const parsed = contactSchema.shape[name].safeParse(el.value);
+      if (parsed.success) {
+        el.setAttribute("aria-invalid", "false");
+        errEl.textContent = "";
+        return true;
+      }
+      el.setAttribute("aria-invalid", "true");
+      errEl.textContent = parsed.error.issues[0]?.message ?? "Campo inválido.";
+      return false;
+    }
+
+    function resetStatus() {
+      if (!status) return;
+      status.textContent = "";
+      status.removeAttribute("data-variant");
+    }
+
+    function showServerError() {
+      if (!status) return;
+      status.textContent =
+        "Ha ocurrido un error, inténtalo de nuevo más tarde o escríbeme directamente a ";
+      const link = document.createElement("a");
+      link.href = "mailto:contacto@diegue.dev";
+      link.className = "underline underline-offset-2";
+      link.textContent = "contacto@diegue.dev";
+      status.appendChild(link);
+      status.appendChild(document.createTextNode("."));
+      status.setAttribute("data-variant", "error");
+    }
+
+    CONTACT_FIELDS.forEach((name) => {
+      const el = fieldEl(name);
+      if (!el) return;
+
+      el.addEventListener(
+        "blur",
+        () => {
+          touched.add(name);
+          validateField(name);
+        },
+        { signal },
+      );
+
+      el.addEventListener(
+        "input",
+        () => {
+          if (touched.has(name)) validateField(name);
+        },
+        { signal },
+      );
+    });
+
+    form.addEventListener(
+      "submit",
+      async (e) => {
+        e.preventDefault();
+
+        let firstInvalid: ContactField | null = null;
+        let allValid = true;
+        for (const name of CONTACT_FIELDS) {
+          touched.add(name);
+          if (!validateField(name)) {
+            allValid = false;
+            if (!firstInvalid) firstInvalid = name;
+          }
+        }
+
+        if (!allValid) {
+          if (firstInvalid) fieldEl(firstInvalid)?.focus();
+          return;
+        }
+
+        resetStatus();
+        submitBtn?.setAttribute("disabled", "true");
+        if (submitBtn) submitBtn.textContent = "Enviando...";
+
+        const formData = new FormData(form);
+        const { error } = await actions.contact(formData);
+
+        submitBtn?.removeAttribute("disabled");
+        if (submitBtn) submitBtn.textContent = "Enviar mensaje";
+
+        if (error) {
+          if (isInputError(error)) {
+            let firstServerInvalid: ContactField | null = null;
+            for (const name of CONTACT_FIELDS) {
+              const msgs = error.fields[name];
+              if (msgs?.length) {
+                fieldEl(name)?.setAttribute("aria-invalid", "true");
+                const errEl = errorEl(name);
+                if (errEl) errEl.textContent = msgs[0];
+                if (!firstServerInvalid) firstServerInvalid = name;
+              }
+            }
+            if (firstServerInvalid) fieldEl(firstServerInvalid)?.focus();
+          } else {
+            showServerError();
+          }
+          return;
+        }
+
+        if (status) {
+          status.textContent = "¡Mensaje enviado! Te responderé lo antes posible.";
+          status.setAttribute("data-variant", "success");
+        }
+        form.reset();
+        touched.clear();
+        CONTACT_FIELDS.forEach((name) => {
+          fieldEl(name)?.setAttribute("aria-invalid", "false");
+          const errEl = errorEl(name);
+          if (errEl) errEl.textContent = "";
+        });
+      },
+      { signal },
+    );
+  }
+
+  document.addEventListener("astro:page-load", initContactForm);
+</script>
