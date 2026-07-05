@@ -1,5 +1,6 @@
 import { defineAction, ActionError } from "astro:actions";
 import { contactSchema } from "../lib/contact-schema";
+import { sendContactForm } from "../lib/web3forms-client";
 
 export const server = {
   contact: defineAction({
@@ -18,46 +19,18 @@ export const server = {
         });
       }
 
-      let response: Response;
-      try {
-        response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            access_key: accessKey,
-            name: input.name,
-            email: input.email,
-            replyto: input.email,
-            subject: `[Portfolio] ${input.subject}`,
-            message: input.message,
-          }),
-        });
-      } catch {
-        throw new ActionError({
-          code: "INTERNAL_SERVER_ERROR",
-          message:
-            "No se pudo conectar con el servicio de envío. Inténtalo de nuevo más tarde.",
-        });
-      }
+      const result = await sendContactForm({
+        accessKey,
+        name: input.name,
+        email: input.email,
+        subject: `[Portfolio] ${input.subject}`,
+        message: input.message,
+      });
 
-      let json: { success?: boolean; message?: string };
-      try {
-        json = await response.json();
-      } catch {
+      if (!result.ok) {
         throw new ActionError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "Respuesta inesperada del servicio de envío.",
-        });
-      }
-
-      if (!response.ok || !json.success) {
-        throw new ActionError({
-          code: "INTERNAL_SERVER_ERROR",
-          message:
-            json.message ?? "No se pudo enviar el mensaje. Inténtalo de nuevo más tarde.",
+          message: result.message,
         });
       }
 
