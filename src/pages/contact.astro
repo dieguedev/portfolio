@@ -3,7 +3,9 @@ export const prerender = false;
 
 import Layout from "../layouts/Layout.astro";
 import { actions, isInputError } from "astro:actions";
-import { Envelope, Linkedin, Whatsapp } from "@boxicons/react";
+import { Envelope } from "@boxicons/react/Envelope";
+import { Linkedin } from "@boxicons/react/Linkedin";
+import { Whatsapp } from "@boxicons/react/Whatsapp";
 
 const result = Astro.getActionResult(actions.contact);
 const inputErrors =
