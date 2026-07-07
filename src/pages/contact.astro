@@ -9,7 +9,9 @@ const result = Astro.getActionResult(actions.contact);
 const inputErrors =
   result?.error && isInputError(result.error) ? result.error.fields : undefined;
 const serverError =
-  result?.error && !isInputError(result.error) ? result.error.message : undefined;
+  result?.error && !isInputError(result.error)
+    ? result.error.message
+    : undefined;
 const success = !result?.error && result?.data?.success === true;
 
 const CONTACT_EMAIL = "contacto@diegue.dev";
@@ -36,17 +38,25 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
         class="mt-6 max-w-lg text-base leading-7 text-white/70 sm:text-[1.05rem] sm:leading-8"
       >
         Cuéntame en qué estás pensando y te respondo lo antes posible. Si
-        prefieres, también puedes escribirme directo por cualquiera de estos
-        canales.
+        prefieres, también puedes escribirme directamente por cualquiera de
+        estos canales.
       </p>
     </div>
 
     <div class="grid gap-8 md:grid-cols-[1.5fr_1fr] md:items-start">
       <div class="glassmorphism rounded-2xl p-6 sm:p-8">
-        <form id="contact-form" method="POST" action={actions.contact} novalidate>
+        <form
+          id="contact-form"
+          method="POST"
+          action={actions.contact}
+          novalidate
+        >
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
-              <label for="field-name" class="mb-2 block text-sm font-medium text-white/80">
+              <label
+                for="field-name"
+                class="mb-2 block text-sm font-medium text-white/80"
+              >
                 Nombre
               </label>
               <input
@@ -71,7 +81,10 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
             </div>
 
             <div>
-              <label for="field-email" class="mb-2 block text-sm font-medium text-white/80">
+              <label
+                for="field-email"
+                class="mb-2 block text-sm font-medium text-white/80"
+              >
                 Email
               </label>
               <input
@@ -94,7 +107,10 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
             </div>
 
             <div class="sm:col-span-2">
-              <label for="field-subject" class="mb-2 block text-sm font-medium text-white/80">
+              <label
+                for="field-subject"
+                class="mb-2 block text-sm font-medium text-white/80"
+              >
                 Asunto
               </label>
               <input
@@ -118,7 +134,10 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
             </div>
 
             <div class="sm:col-span-2">
-              <label for="field-message" class="mb-2 block text-sm font-medium text-white/80">
+              <label
+                for="field-message"
+                class="mb-2 block text-sm font-medium text-white/80"
+              >
                 Mensaje
               </label>
               <textarea
@@ -162,22 +181,28 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
               role="status"
               aria-live="polite"
               class="text-sm text-white/70 data-[variant=error]:text-red-300 data-[variant=success]:text-emerald-300"
-              data-variant={success ? "success" : serverError ? "error" : undefined}
+              data-variant={success
+                ? "success"
+                : serverError
+                  ? "error"
+                  : undefined}
             >
               {success && "¡Mensaje enviado! Te responderé lo antes posible."}
-              {serverError && (
-                <>
-                  Ha ocurrido un error, inténtalo de nuevo más tarde o
-                  escríbeme directamente a{" "}
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    class="underline underline-offset-2"
-                  >
-                    {CONTACT_EMAIL}
-                  </a>
-                  .
-                </>
-              )}
+              {
+                serverError && (
+                  <>
+                    Ha ocurrido un error, inténtalo de nuevo más tarde o
+                    escríbeme directamente a{" "}
+                    <a
+                      href={`mailto:${CONTACT_EMAIL}`}
+                      class="underline underline-offset-2"
+                    >
+                      {CONTACT_EMAIL}
+                    </a>
+                    .
+                  </>
+                )
+              }
             </p>
           </div>
         </form>
@@ -186,7 +211,12 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
       <div class="flex flex-col gap-4">
         <p class="eyebrow">O directamente</p>
         <a href={`mailto:${CONTACT_EMAIL}`} class="button-glass w-full">
-          <Envelope width={22} height={22} fill="currentColor" aria-hidden="true" />
+          <Envelope
+            width={22}
+            height={22}
+            fill="currentColor"
+            aria-hidden="true"
+          />
           {CONTACT_EMAIL}
         </a>
         <a
@@ -195,7 +225,12 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
           rel="noopener noreferrer"
           class="button-glass w-full"
         >
-          <Linkedin width={22} height={22} fill="currentColor" aria-hidden="true" />
+          <Linkedin
+            width={22}
+            height={22}
+            fill="currentColor"
+            aria-hidden="true"
+          />
           LinkedIn
         </a>
         <a
@@ -204,7 +239,12 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
           rel="noopener noreferrer"
           class="button-glass w-full"
         >
-          <Whatsapp width={22} height={22} fill="currentColor" aria-hidden="true" />
+          <Whatsapp
+            width={22}
+            height={22}
+            fill="currentColor"
+            aria-hidden="true"
+          />
           WhatsApp
         </a>
       </div>
