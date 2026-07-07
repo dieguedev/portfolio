@@ -2,19 +2,13 @@
 export const prerender = false;
 
 import Layout from "../layouts/Layout.astro";
-import { actions, isInputError } from "astro:actions";
 import { Envelope } from "@boxicons/react/Envelope";
 import { Linkedin } from "@boxicons/react/Linkedin";
 import { Whatsapp } from "@boxicons/react/Whatsapp";
 
-const result = Astro.getActionResult(actions.contact);
-const inputErrors =
-  result?.error && isInputError(result.error) ? result.error.fields : undefined;
-const serverError =
-  result?.error && !isInputError(result.error)
-    ? result.error.message
-    : undefined;
-const success = !result?.error && result?.data?.success === true;
+const success = Astro.url.searchParams.get("sent") === "1";
+const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
+const redirectUrl = new URL("/contact?sent=1", Astro.url.origin).toString();
 
 const CONTACT_EMAIL = "contacto@diegue.dev";
 const whatsappText = encodeURIComponent(
@@ -50,9 +44,11 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
         <form
           id="contact-form"
           method="POST"
-          action={actions.contact}
+          action="https://api.web3forms.com/submit"
           novalidate
         >
+          <input type="hidden" name="access_key" value={web3formsAccessKey} />
+          <input type="hidden" name="redirect" value={redirectUrl} />
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
               <label
@@ -69,7 +65,7 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
                 minlength="2"
                 maxlength="80"
                 autocomplete="name"
-                aria-invalid={inputErrors?.name ? "true" : "false"}
+                aria-invalid="false"
                 aria-describedby="field-name-error"
                 class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
               />
@@ -77,9 +73,7 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
                 id="field-name-error"
                 role="alert"
                 class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
-              >
-                {inputErrors?.name?.[0] ?? ""}
-              </p>
+              ></p>
             </div>
 
             <div>
@@ -95,7 +89,7 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
                 type="email"
                 required
                 autocomplete="email"
-                aria-invalid={inputErrors?.email ? "true" : "false"}
+                aria-invalid="false"
                 aria-describedby="field-email-error"
                 class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
               />
@@ -103,9 +97,7 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
                 id="field-email-error"
                 role="alert"
                 class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
-              >
-                {inputErrors?.email?.[0] ?? ""}
-              </p>
+              ></p>
             </div>
 
             <div class="sm:col-span-2">
@@ -122,7 +114,7 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
                 required
                 minlength="2"
                 maxlength="150"
-                aria-invalid={inputErrors?.subject ? "true" : "false"}
+                aria-invalid="false"
                 aria-describedby="field-subject-error"
                 class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
               />
@@ -130,9 +122,7 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
                 id="field-subject-error"
                 role="alert"
                 class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
-              >
-                {inputErrors?.subject?.[0] ?? ""}
-              </p>
+              ></p>
             </div>
 
             <div class="sm:col-span-2">
@@ -149,7 +139,7 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
                 minlength="10"
                 maxlength="2000"
                 rows="5"
-                aria-invalid={inputErrors?.message ? "true" : "false"}
+                aria-invalid="false"
                 aria-describedby="field-message-error"
                 class="w-full resize-none rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
               ></textarea>
@@ -157,9 +147,7 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
                 id="field-message-error"
                 role="alert"
                 class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
-              >
-                {inputErrors?.message?.[0] ?? ""}
-              </p>
+              ></p>
             </div>
           </div>
 
@@ -183,28 +171,9 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
               role="status"
               aria-live="polite"
               class="text-sm text-white/70 data-[variant=error]:text-red-300 data-[variant=success]:text-emerald-300"
-              data-variant={success
-                ? "success"
-                : serverError
-                  ? "error"
-                  : undefined}
+              data-variant={success ? "success" : undefined}
             >
               {success && "¡Mensaje enviado! Te responderé lo antes posible."}
-              {
-                serverError && (
-                  <>
-                    Ha ocurrido un error, inténtalo de nuevo más tarde o
-                    escríbeme directamente a{" "}
-                    <a
-                      href={`mailto:${CONTACT_EMAIL}`}
-                      class="underline underline-offset-2"
-                    >
-                      {CONTACT_EMAIL}
-                    </a>
-                    .
-                  </>
-                )
-              }
             </p>
           </div>
         </form>

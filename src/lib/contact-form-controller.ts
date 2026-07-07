@@ -1,9 +1,9 @@
-import { actions, isInputError } from "astro:actions";
 import {
   contactSchema,
   CONTACT_FIELDS,
   type ContactField,
 } from "./contact-schema";
+import { sendContactForm } from "./web3forms-client";
 
 const CONTACT_EMAIL = "contacto@diegue.dev";
 
@@ -53,8 +53,21 @@ export function initContactForm(form: HTMLFormElement): () => void {
     link.textContent = CONTACT_EMAIL;
     status.appendChild(link);
     status.appendChild(document.createTextNode("."));
-    [];
     status.setAttribute("data-variant", "error");
+  }
+
+  function showSuccess() {
+    if (status) {
+      status.textContent = "¡Mensaje enviado! Te responderé lo antes posible.";
+      status.setAttribute("data-variant", "success");
+    }
+    form.reset();
+    touched.clear();
+    CONTACT_FIELDS.forEach((name) => {
+      fieldEl(name)?.setAttribute("aria-invalid", "false");
+      const errEl = errorEl(name);
+      if (errEl) errEl.textContent = "";
+    });
   }
 
   CONTACT_FIELDS.forEach((name) => {
@@ -100,46 +113,36 @@ export function initContactForm(form: HTMLFormElement): () => void {
       }
 
       resetStatus();
+
+      const formData = new FormData(form);
+      const botcheck = String(formData.get("botcheck") ?? "");
+
+      if (botcheck.length > 0) {
+        showSuccess();
+        return;
+      }
+
       submitBtn?.setAttribute("disabled", "true");
       if (submitBtn) submitBtn.textContent = "Enviando...";
 
-      const formData = new FormData(form);
-      const { error } = await actions.contact(formData);
+      const subject = String(formData.get("subject") ?? "");
+      const result = await sendContactForm({
+        accessKey: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY,
+        name: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        subject: `[Portfolio] ${subject}`,
+        message: String(formData.get("message") ?? ""),
+      });
 
       submitBtn?.removeAttribute("disabled");
       if (submitBtn) submitBtn.textContent = "Enviar mensaje";
 
-      if (error) {
-        if (isInputError(error)) {
-          let firstServerInvalid: ContactField | null = null;
-          for (const name of CONTACT_FIELDS) {
-            const msgs = error.fields[name];
-            if (msgs?.length) {
-              fieldEl(name)?.setAttribute("aria-invalid", "true");
-              const errEl = errorEl(name);
-              if (errEl) errEl.textContent = msgs[0];
-              if (!firstServerInvalid) firstServerInvalid = name;
-            }
-          }
-          if (firstServerInvalid) fieldEl(firstServerInvalid)?.focus();
-        } else {
-          showServerError();
-        }
+      if (!result.ok) {
+        showServerError();
         return;
       }
 
-      if (status) {
-        status.textContent =
-          "¡Mensaje enviado! Te responderé lo antes posible.";
-        status.setAttribute("data-variant", "success");
-      }
-      form.reset();
-      touched.clear();
-      CONTACT_FIELDS.forEach((name) => {
-        fieldEl(name)?.setAttribute("aria-invalid", "false");
-        const errEl = errorEl(name);
-        if (errEl) errEl.textContent = "";
-      });
+      showSuccess();
     },
     { signal },
   );
