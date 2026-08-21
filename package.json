@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@astrojs/react": "^5.0.5",
-    "@astrojs/vercel": "^10.0.8",
     "@boxicons/react": "1.0.3",
     "@dev.icons/react": "^1.1.0",
     "@fontsource-variable/montserrat": "5.2.8",

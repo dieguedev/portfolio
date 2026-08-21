@@ -1,14 +1,8 @@
 ---
-export const prerender = false;
-
 import Layout from "../layouts/Layout.astro";
 import { Envelope } from "@boxicons/react/Envelope";
 import { Linkedin } from "@boxicons/react/Linkedin";
 import { Whatsapp } from "@boxicons/react/Whatsapp";
-
-const success = Astro.url.searchParams.get("sent") === "1";
-const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
-const redirectUrl = new URL("/contact?sent=1", Astro.url.origin).toString();
 
 const CONTACT_EMAIL = "contacto@diegue.dev";
 const whatsappText = encodeURIComponent(
@@ -33,206 +27,48 @@ const whatsappHref = `https://wa.me/34614914550?text=${whatsappText}`;
       <p
         class="mt-6 max-w-lg text-base leading-7 text-white/70 sm:text-[1.05rem] sm:leading-8"
       >
-        Cuéntame en qué estás pensando y te respondo lo antes posible. Si
-        prefieres, también puedes escribirme directamente por cualquiera de
-        estos canales.
+        Elige el canal que prefieras y hablamos.
       </p>
     </div>
 
-    <div class="grid gap-8 md:grid-cols-[1.5fr_1fr] md:items-start">
-      <div class="glassmorphism rounded-2xl p-6 sm:p-8">
-        <form
-          id="contact-form"
-          method="POST"
-          action="https://api.web3forms.com/submit"
-          novalidate
-        >
-          <input type="hidden" name="access_key" value={web3formsAccessKey} />
-          <input type="hidden" name="redirect" value={redirectUrl} />
-          <div class="grid gap-5 sm:grid-cols-2">
-            <div>
-              <label
-                for="field-name"
-                class="mb-2 block text-sm font-medium text-white/80"
-              >
-                Nombre
-              </label>
-              <input
-                id="field-name"
-                name="name"
-                type="text"
-                required
-                minlength="2"
-                maxlength="80"
-                autocomplete="name"
-                aria-invalid="false"
-                aria-describedby="field-name-error"
-                class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
-              />
-              <p
-                id="field-name-error"
-                role="alert"
-                class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
-              ></p>
-            </div>
-
-            <div>
-              <label
-                for="field-email"
-                class="mb-2 block text-sm font-medium text-white/80"
-              >
-                Email
-              </label>
-              <input
-                id="field-email"
-                name="email"
-                type="email"
-                required
-                autocomplete="email"
-                aria-invalid="false"
-                aria-describedby="field-email-error"
-                class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
-              />
-              <p
-                id="field-email-error"
-                role="alert"
-                class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
-              ></p>
-            </div>
-
-            <div class="sm:col-span-2">
-              <label
-                for="field-subject"
-                class="mb-2 block text-sm font-medium text-white/80"
-              >
-                Asunto
-              </label>
-              <input
-                id="field-subject"
-                name="subject"
-                type="text"
-                required
-                minlength="2"
-                maxlength="150"
-                aria-invalid="false"
-                aria-describedby="field-subject-error"
-                class="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
-              />
-              <p
-                id="field-subject-error"
-                role="alert"
-                class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
-              ></p>
-            </div>
-
-            <div class="sm:col-span-2">
-              <label
-                for="field-message"
-                class="mb-2 block text-sm font-medium text-white/80"
-              >
-                Mensaje
-              </label>
-              <textarea
-                id="field-message"
-                name="message"
-                required
-                minlength="10"
-                maxlength="2000"
-                rows="5"
-                aria-invalid="false"
-                aria-describedby="field-message-error"
-                class="w-full resize-none rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 aria-[invalid=true]:border-red-400/60"
-              ></textarea>
-              <p
-                id="field-message-error"
-                role="alert"
-                class="mt-1.5 min-h-[1.1em] text-xs text-red-300"
-              ></p>
-            </div>
-          </div>
-
-          <div class="sr-only" aria-hidden="true">
-            <label for="field-botcheck">No rellenar este campo</label>
-            <input
-              id="field-botcheck"
-              type="text"
-              name="botcheck"
-              tabindex="-1"
-              autocomplete="off"
-            />
-          </div>
-
-          <div class="mt-6 flex flex-wrap items-center gap-4">
-            <button id="contact-submit" type="submit" class="button">
-              Enviar mensaje
-            </button>
-            <p
-              id="form-status"
-              role="status"
-              aria-live="polite"
-              class="text-sm text-white/70 data-[variant=error]:text-red-300 data-[variant=success]:text-emerald-300"
-              data-variant={success ? "success" : undefined}
-            >
-              {success && "¡Mensaje enviado! Te responderé lo antes posible."}
-            </p>
-          </div>
-        </form>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <p class="eyebrow">O directamente</p>
-        <a href={`mailto:${CONTACT_EMAIL}`} class="button-glass w-full">
-          <Envelope
-            width={22}
-            height={22}
-            fill="currentColor"
-            aria-hidden="true"
-          />
-          {CONTACT_EMAIL}
-        </a>
-        <a
-          href="https://linkedin.com/in/diego-bogo/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button-glass w-full"
-        >
-          <Linkedin
-            width={22}
-            height={22}
-            fill="currentColor"
-            aria-hidden="true"
-          />
-          LinkedIn
-        </a>
-        <a
-          href={whatsappHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button-glass w-full"
-        >
-          <Whatsapp
-            width={22}
-            height={22}
-            fill="currentColor"
-            aria-hidden="true"
-          />
-          WhatsApp
-        </a>
-      </div>
+    <div class="grid gap-4 sm:grid-cols-3">
+      <a href={`mailto:${CONTACT_EMAIL}`} class="button-glass w-full">
+        <Envelope
+          width={22}
+          height={22}
+          fill="currentColor"
+          aria-hidden="true"
+        />
+        {CONTACT_EMAIL}
+      </a>
+      <a
+        href="https://linkedin.com/in/diego-bogo/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button-glass w-full"
+      >
+        <Linkedin
+          width={22}
+          height={22}
+          fill="currentColor"
+          aria-hidden="true"
+        />
+        LinkedIn
+      </a>
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button-glass w-full"
+      >
+        <Whatsapp
+          width={22}
+          height={22}
+          fill="currentColor"
+          aria-hidden="true"
+        />
+        WhatsApp
+      </a>
     </div>
   </section>
 </Layout>
-
-<script>
-  import { initContactForm } from "../lib/contact-form-controller";
-
-  let dispose: (() => void) | null = null;
-
-  function mount() {
-    dispose?.();
-    const form = document.getElementById("contact-form");
-    dispose = form instanceof HTMLFormElement ? initContactForm(form) : null;
-  }
-
-  document.addEventListener("astro:page-load", mount);
-</script>
