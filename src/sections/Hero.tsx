@@ -30,7 +30,7 @@ export default function Hero() {
           DESARROLLADOR FRONTEND
         </p>
         <div className="mb-2 text-[clamp(3.5rem,15vw,8.5rem)] font-semibold leading-[0.85] tracking-normal text-white drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)] sm:mb-6">
-          <span>hola, soy</span>
+          <span>hola, soy</span>{" "}
           <span className="text-accent">diegue</span>
         </div>
         <p className="mt-5 max-w-[32rem] text-sm font-normal leading-6 text-white/80 sm:text-base sm:leading-7">
