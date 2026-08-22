@@ -1,7 +1,13 @@
-import IdleHeroBackground from "@/components/ui/IdleHeroBackground";
+"use client";
+
+import { idleComponent } from "@/lib/useIdleComponent";
 import Loader from "@/components/Loader";
 import diegue from "@/assets/diegue.svg";
 import logo from "@/assets/logo.svg";
+
+const HeroBackground = idleComponent(
+  () => import("@/components/ui/HeroBackground"),
+);
 
 export default function Hero() {
   return (
@@ -11,7 +17,7 @@ export default function Hero() {
       aria-labelledby="home-title"
     >
       <div className="absolute inset-0 z-0" aria-hidden="true">
-        <IdleHeroBackground />
+        {HeroBackground && <HeroBackground />}
       </div>
 
       <div className="absolute inset-0 z-[1] bg-black/70" />
@@ -34,7 +40,12 @@ export default function Hero() {
       </div>
 
       <div className="absolute bottom-20 z-10" aria-hidden="true">
-        <Loader spinningIcon={diegue.src} centerIcon={logo.src} rotationDuration={10} size={80} />
+        <Loader
+          spinningIcon={diegue.src}
+          centerIcon={logo.src}
+          rotationDuration={10}
+          size={80}
+        />
       </div>
     </section>
   );

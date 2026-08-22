@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Menu from "@/components/Menu";
-import IdleClickSpark from "@/components/ui/IdleClickSpark";
+import ClickSpark from "@/components/ui/ClickSpark";
 import "./globals.css";
 
 const montserrat = localFont({
@@ -44,7 +44,7 @@ export default function RootLayout({
       <body>
         <Menu />
         <main className="min-h-dvh bg-black text-white">{children}</main>
-        <IdleClickSpark
+        <ClickSpark
           sparkColor="#fff"
           sparkSize={10}
           sparkRadius={18}
