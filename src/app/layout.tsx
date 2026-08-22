@@ -6,6 +6,7 @@ import "./globals.css";
 
 const montserrat = localFont({
   src: "../fonts/montserrat-latin-wght-normal.woff2",
+  weight: "100 900",
   variable: "--font-montserrat",
   display: "swap",
 });
