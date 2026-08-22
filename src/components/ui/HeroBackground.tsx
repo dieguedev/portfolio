@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, type FC } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, wrapEffect } from "@react-three/postprocessing";

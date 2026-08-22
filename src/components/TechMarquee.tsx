@@ -1,51 +1,23 @@
----
-import type { ComponentType } from "react";
+"use client";
+
+import { useEffect, useRef, type ReactNode } from "react";
+import gsap from "gsap";
 
 interface Tech {
   name: string;
-  icon: ComponentType<{ size?: number | string; color?: string; "aria-hidden"?: "true" }>;
+  icon: ReactNode;
 }
 
-interface Props {
+interface TechMarqueeProps {
   tecnologias: Tech[];
 }
 
-const { tecnologias } = Astro.props;
----
+export default function TechMarquee({ tecnologias }: TechMarqueeProps) {
+  const trackRef = useRef<HTMLUListElement>(null);
 
-<div id="tech-marquee" class="overflow-hidden -mx-6 sm:mx-0">
-  <ul
-    id="marquee-track"
-    data-count={tecnologias.length}
-    class="flex will-change-transform"
-    aria-label="Listado de tecnologías"
-  >
-    {
-      [...tecnologias, ...tecnologias].map((tech, i) => (
-        <li
-          class="flex shrink-0 flex-col items-center gap-3 text-center"
-          aria-hidden={i >= tecnologias.length ? "true" : undefined}
-        >
-          <tech.icon size={52} color="currentColor" aria-hidden="true" />
-          <span class="eyebrow">
-            {tech.name}
-          </span>
-        </li>
-      ))
-    }
-  </ul>
-</div>
-
-<script>
-  import gsap from "gsap";
-
-  let cleanup: (() => void) | null = null;
-
-  function initMarquee() {
-    cleanup?.();
-
-    const track = document.getElementById("marquee-track");
-    const container = track?.parentElement as HTMLElement | null;
+  useEffect(() => {
+    const track = trackRef.current;
+    const container = track?.parentElement;
     if (!track || !container) return;
 
     const N = window.innerWidth < 640 ? 3 : 6;
@@ -54,7 +26,7 @@ const { tecnologias } = Astro.props;
       li.style.width = `${itemWidth}px`;
     });
 
-    const count = parseInt(track.dataset.count ?? "0");
+    const count = tecnologias.length;
     const translateEndMobile = track.scrollWidth / 2;
     const translateEndDesktop = (count - N) * itemWidth;
 
@@ -69,10 +41,9 @@ const { tecnologias } = Astro.props;
         ease: "none",
         repeat: -1,
       });
-      cleanup = () => {
+      return () => {
         gsap.killTweensOf(track);
       };
-      return;
     }
 
     const scrollTrigger = Math.max(
@@ -109,12 +80,30 @@ const { tecnologias } = Astro.props;
 
     window.addEventListener("wheel", onWheel, { passive: false });
 
-    cleanup = () => {
+    return () => {
       window.removeEventListener("wheel", onWheel);
       gsap.killTweensOf(track);
     };
-  }
+  }, [tecnologias.length]);
 
-  document.addEventListener("astro:page-load", initMarquee);
-  document.addEventListener("astro:before-swap", () => cleanup?.());
-</script>
+  return (
+    <div className="-mx-6 overflow-hidden sm:mx-0">
+      <ul
+        ref={trackRef}
+        className="flex will-change-transform"
+        aria-label="Listado de tecnologías"
+      >
+        {[...tecnologias, ...tecnologias].map((tech, i) => (
+          <li
+            key={`${tech.name}-${i}`}
+            className="flex shrink-0 flex-col items-center gap-3 text-center"
+            aria-hidden={i >= tecnologias.length ? "true" : undefined}
+          >
+            {tech.icon}
+            <span className="eyebrow">{tech.name}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
