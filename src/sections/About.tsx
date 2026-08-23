@@ -34,7 +34,7 @@ const experiencia = [
 export default function About() {
   return (
     <section id="about" className="scroll-mt-28" aria-labelledby="about-title">
-      <div className="mx-auto max-w-[920px] px-6 pb-16 pt-24">
+      <div className="mx-auto max-w-[920px] px-6 pb-10 pt-14 sm:pb-16 sm:pt-24">
         <div className="mb-8 md:mb-12">
           <h2 className="eyebrow mb-5">Acerca de</h2>
           <p
@@ -63,9 +63,15 @@ export default function About() {
       </div>
 
       <div
-        className="mx-auto max-w-[920px] px-6 pb-24"
-        aria-label="Puntos fuertes"
+        className="mx-auto max-w-[920px] px-6 pb-14 sm:pb-24"
+        aria-labelledby="skills-title"
       >
+        <h3
+          id="skills-title"
+          className="mb-6 text-[clamp(1.4rem,4vw,2rem)] font-semibold font-sans leading-[0.95] text-white"
+        >
+          ¿Qué puedo aportar?
+        </h3>
         <CardCarousel>
           {skills.map((skill) => (
             <div
@@ -79,9 +85,15 @@ export default function About() {
       </div>
 
       <div
-        className="mx-auto max-w-[920px] px-6 pb-20 pt-4"
-        aria-label="Experiencia"
+        className="mx-auto max-w-[920px] px-6 pb-12 pt-4 sm:pb-20"
+        aria-labelledby="experiencia-title"
       >
+        <h3
+          id="experiencia-title"
+          className="mb-6 text-[clamp(1.4rem,4vw,2rem)] font-semibold font-sans leading-[0.95] text-white"
+        >
+          Experiencia
+        </h3>
         <div className="relative">
           <div className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-white/[0.15]" />
 

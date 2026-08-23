@@ -3,7 +3,7 @@ import { Linkedin } from "@boxicons/react/Linkedin";
 export default function CtaBanner() {
   return (
     <div
-      className="border-t border-white/[0.08] px-6 py-24 text-center"
+      className="border-t border-white/[0.08] px-6 py-14 text-center sm:py-24"
       style={{
         background:
           "radial-gradient(ellipse 100% 80% at 50% 0%, rgba(255,255,255,0.13) 0%, transparent 100%)",
