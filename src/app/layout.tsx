@@ -44,7 +44,7 @@ export default function RootLayout({
     <html lang="es" className={`${montserrat.variable} ${cormorant.variable}`}>
       <body>
         <Menu />
-        <main className="min-h-dvh bg-black text-white">{children}</main>
+        <main className="min-h-svh bg-black text-white">{children}</main>
         <ClickSpark
           sparkColor="#fff"
           sparkSize={10}

@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-black"
+      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-black"
       aria-labelledby="home-title"
     >
       <div className="absolute inset-0 z-0" aria-hidden="true">
