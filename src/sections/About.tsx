@@ -34,7 +34,7 @@ const experiencia = [
 export default function About() {
   return (
     <section id="about" className="scroll-mt-28" aria-labelledby="about-title">
-      <div className="mx-auto max-w-[920px] px-6 pb-10 pt-14 sm:pb-16 sm:pt-24">
+      <div className="mx-auto max-w-[920px] px-6 pb-14 pt-14 sm:pb-24 sm:pt-24">
         <div className="mb-8 md:mb-12">
           <h2 className="eyebrow mb-5">Acerca de</h2>
           <p
@@ -45,7 +45,7 @@ export default function About() {
           </p>
         </div>
 
-        <blockquote className="mb-16 border-l-[3px] border-l-white/40 pl-6">
+        <blockquote className="border-l-[3px] border-l-white/40 pl-6">
           <p className="text-base leading-7 text-white/80 sm:text-[1.05rem] sm:leading-8">
             Desarrollador web en{" "}
             <strong className="font-semibold text-white">Pamplona</strong>{" "}
@@ -85,7 +85,7 @@ export default function About() {
       </div>
 
       <div
-        className="mx-auto max-w-[920px] px-6 pb-12 pt-4 sm:pb-20"
+        className="mx-auto max-w-[920px] px-6 pb-14 sm:pb-24"
         aria-labelledby="experiencia-title"
       >
         <h3
