@@ -1,13 +1,11 @@
-@import "@fontsource-variable/montserrat";
-@import "@fontsource/cormorant-garamond/latin-600-italic.css";
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Montserrat Variable", sans-serif;
+  --font-sans: var(--font-montserrat), sans-serif;
   --font-heading: var(--font-sans);
-  --font-display: "Cormorant Garamond", serif;
+  --font-display: var(--font-cormorant), serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -33,25 +31,33 @@
 }
 
 html {
-  font-family:
-    "Montserrat Variable",
-    ui-sans-serif,
-    system-ui,
-    sans-serif;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   background: #000;
   color: #fff;
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   margin: 0;
-  min-height: 100dvh;
+  min-height: 100svh;
   background: #000;
   color: #fff;
 }
 
 canvas {
   display: block;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @utility glassmorphism {
@@ -72,4 +78,25 @@ canvas {
 
 @utility button-glass {
   @apply glassmorphism inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white/70 transition-colors duration-200 hover:bg-white/[0.12] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50;
+}
+
+@utility skill-card-surface {
+  background-image: var(--skill-card-texture);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--skill-card-pattern);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    mix-blend-mode: overlay;
+    opacity: var(--skill-card-pattern-opacity, 0.2);
+    pointer-events: none;
+  }
 }

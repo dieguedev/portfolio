@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useEffect, useRef } from "react";
 
 type Easing = "linear" | "ease-in" | "ease-out" | "ease-in-out";
