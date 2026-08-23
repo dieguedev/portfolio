@@ -13,7 +13,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="scroll-mt-28 mx-auto max-w-[920px] px-6 pb-20 pt-24"
+      className="scroll-mt-28 mx-auto max-w-[920px] px-6 pb-12 pt-14 sm:pb-20 sm:pt-24"
       aria-labelledby="contact-title"
     >
       <div className="mb-12 md:mb-16">
