@@ -1,15 +1,10 @@
-import type { Metadata } from "next";
 import { Envelope } from "@boxicons/react/Envelope";
 import { Linkedin } from "@boxicons/react/Linkedin";
 import { Whatsapp } from "@boxicons/react/Whatsapp";
 
-export const metadata: Metadata = {
-  title: "Diegue | Contacto",
-};
-
 const CONTACT_EMAIL = "contacto@diegue.dev";
 
-export default function ContactPage() {
+export default function Contact() {
   const whatsappText = encodeURIComponent(
     "Hola! He visto tu portfolio y me encantaría solicitar más información.",
   );
@@ -17,11 +12,12 @@ export default function ContactPage() {
 
   return (
     <section
-      className="mx-auto max-w-[920px] px-6 pb-20 pt-40"
+      id="contact"
+      className="scroll-mt-28 mx-auto max-w-[920px] px-6 pb-20 pt-24"
       aria-labelledby="contact-title"
     >
       <div className="mb-12 md:mb-16">
-        <h1 className="eyebrow mb-5">Contacto</h1>
+        <h2 className="eyebrow mb-5">Contacto</h2>
         <p
           id="contact-title"
           className="text-[clamp(3rem,12vw,7rem)] font-semibold leading-[0.88] text-white"
