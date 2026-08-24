@@ -6,7 +6,7 @@ import diegue from "@/assets/diegue.svg";
 import logo from "@/assets/logo.svg";
 
 const HeroBackground = idleComponent(
-  () => import("@/components/ui/HeroBackground"),
+  () => import("@/components/HeroBackground"),
 );
 
 export default function Hero() {
@@ -29,10 +29,11 @@ export default function Hero() {
         <p className="eyebrow mb-3 text-white/60 sm:text-sm" aria-hidden="true">
           DESARROLLADOR FRONTEND
         </p>
-        <div className="mb-2 text-[clamp(3.5rem,15vw,8.5rem)] font-semibold leading-[0.85] tracking-normal text-white drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)] sm:mb-6">
-          <span>hola, soy</span>{" "}
-          <span className="text-accent">diegue</span>
-        </div>
+        <p className="mb-2 text-[clamp(3.5rem,15vw,8.5rem)] font-semibold leading-[0.85] tracking-normal text-white text-accent drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)] sm:mb-6">
+          <span>hola, soy</span>
+          <br />
+          <span>diegue</span>
+        </p>
         <p className="mt-5 max-w-[32rem] text-sm font-normal leading-6 text-white/80 sm:text-base sm:leading-7">
           Construyo experiencias web rápidas y accesibles utilizando React,
           TypeScript y una gran atención al detalle.
