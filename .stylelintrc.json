@@ -1,0 +1,167 @@
+{
+  "customSyntax": "postcss-scss",
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "order/order": [
+      "dollar-variables",
+      { "type": "at-rule", "name": "extend" },
+      { "type": "at-rule", "name": "include" },
+      "custom-properties",
+      "declarations",
+      { "type": "rule", "emptyLineBefore": "always" },
+      "at-rules"
+    ],
+    "order/properties-order": [
+      {
+        "groupName": "generated-content",
+        "emptyLineBefore": "always",
+        "properties": ["content"]
+      },
+      {
+        "groupName": "position-and-layout",
+        "emptyLineBefore": "always",
+        "properties": [
+          "position",
+          "inset",
+          "z-index",
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "container-type",
+          "container-name",
+          "display",
+          "flex",
+          "flex-direction",
+          "flex-wrap",
+          "flex-grow",
+          "flex-shrink",
+          "flex-basis",
+          "align-items",
+          "align-content",
+          "align-self",
+          "justify-content",
+          "justify-items",
+          "justify-self",
+          "place-items",
+          "place-content",
+          "gap",
+          "row-gap",
+          "column-gap",
+          "grid",
+          "grid-template-columns",
+          "grid-template-rows",
+          "grid-template-areas",
+          "grid-column",
+          "grid-row",
+          "grid-area",
+          "float",
+          "clear"
+        ]
+      },
+      {
+        "groupName": "display-and-visibility",
+        "emptyLineBefore": "always",
+        "properties": [
+          "visibility",
+          "opacity",
+          "transform",
+          "transform-origin",
+          "filter",
+          "pointer-events"
+        ]
+      },
+      {
+        "groupName": "clipping",
+        "emptyLineBefore": "always",
+        "properties": ["overflow", "overflow-x", "overflow-y", "clip", "clip-path"]
+      },
+      {
+        "groupName": "animation",
+        "emptyLineBefore": "always",
+        "properties": [
+          "animation",
+          "transition",
+          "transition-property",
+          "transition-duration",
+          "transition-timing-function",
+          "transition-delay"
+        ]
+      },
+      {
+        "groupName": "box-model",
+        "emptyLineBefore": "always",
+        "properties": [
+          "margin",
+          "margin-top",
+          "margin-right",
+          "margin-bottom",
+          "margin-left",
+          "box-shadow",
+          "outline",
+          "outline-color",
+          "outline-offset",
+          "border",
+          "border-width",
+          "border-style",
+          "border-color",
+          "border-top",
+          "border-right",
+          "border-bottom",
+          "border-left",
+          "border-radius",
+          "box-sizing",
+          "aspect-ratio",
+          "width",
+          "min-width",
+          "max-width",
+          "height",
+          "min-height",
+          "max-height",
+          "padding",
+          "padding-top",
+          "padding-right",
+          "padding-bottom",
+          "padding-left"
+        ]
+      },
+      {
+        "groupName": "background",
+        "emptyLineBefore": "always",
+        "properties": [
+          "background",
+          "background-color",
+          "background-image",
+          "background-repeat",
+          "background-position",
+          "background-size",
+          "background-attachment",
+          "mix-blend-mode",
+          "backdrop-filter",
+          "-webkit-backdrop-filter",
+          "cursor"
+        ]
+      },
+      {
+        "groupName": "typography",
+        "emptyLineBefore": "always",
+        "properties": [
+          "font",
+          "font-size",
+          "line-height",
+          "font-family",
+          "font-weight",
+          "font-style",
+          "text-align",
+          "text-transform",
+          "text-decoration",
+          "text-overflow",
+          "white-space",
+          "letter-spacing",
+          "word-spacing",
+          "color"
+        ]
+      }
+    ]
+  }
+}

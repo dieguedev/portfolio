@@ -7,8 +7,8 @@ import { RocketAlt } from "@boxicons/react/RocketAlt";
 import cftLogo from "@/assets/cft.png";
 import lkLogo from "@/assets/lk.png";
 import starIcon from "@/assets/star.svg";
-import CardCarousel from "@/components/ui/CardCarousel";
-import SkillCard from "@/components/ui/SkillCard";
+import CardCarousel from "@/components/CardCarousel";
+import SkillCard from "@/components/SkillCard/SkillCard";
 
 const iconProps = {
   size: "md",
