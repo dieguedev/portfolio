@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
+import styles from "./ClickSpark.module.scss";
 
 type Easing = "linear" | "ease-in" | "ease-out" | "ease-in-out";
 
@@ -144,7 +145,7 @@ export default function ClickSpark({
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[70]"
+      className={styles.canvas}
     />
   );
 }

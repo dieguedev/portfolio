@@ -56,11 +56,3 @@ body {
 canvas {
   display: block;
 }
-
-@utility glassmorphism {
-  @apply border border-white/20 bg-white/[0.11] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5.2px];
-}
-
-@utility eyebrow {
-  @apply text-xs font-medium uppercase tracking-[0.28em] text-white/50;
-}

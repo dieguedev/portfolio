@@ -1,0 +1,238 @@
+@use "../../../styles/breakpoints" as bp;
+@use "../../../styles/spacing";
+@use "../../../styles/utilities" as utils;
+
+.nav {
+  @include utils.glassmorphism;
+
+  position: fixed;
+  z-index: 60;
+  top: 2rem;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  transform: translateX(-50%);
+
+  border-radius: 1rem;
+
+  width: calc(100vw - 3rem);
+  max-width: 920px;
+
+  background-color: rgb(255 255 255 / 8%);
+
+  color: rgb(255 255 255 / 65%);
+  padding-inline: spacing.spacing("small");
+  padding-block: spacing.spacing("tiny");
+}
+
+.logoLink {
+  transition-property: color, background-color, border-color, outline-color,
+    text-decoration-color, fill, stroke;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  border-radius: 0.75rem;
+  padding: spacing.spacing("xtiny");
+
+  &:hover {
+    background-color: rgb(255 255 255 / 8%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(255 255 255 / 50%);
+  }
+}
+
+.logoImg {
+  filter: brightness(0) invert(1);
+}
+
+.toggleButton {
+  display: flex;
+  align-items: center;
+  gap: spacing.spacing("tiny");
+
+  transition-property: color, background-color, border-color, outline-color,
+    text-decoration-color, fill, stroke;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  border-radius: 0.75rem;
+
+  color: rgb(255 255 255 / 80%);
+  padding-inline: spacing.spacing("small");
+  padding-block: spacing.spacing("tiny");
+
+  &:hover {
+    background-color: rgb(255 255 255 / 12%);
+
+    color: #fff;
+  }
+
+  @include bp.respond-to("sm") {
+    display: none;
+  }
+}
+
+.toggleContent {
+  display: flex;
+  align-items: center;
+  gap: spacing.spacing("tiny");
+}
+
+.toggleLabel {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+.desktopNav {
+  display: none;
+  gap: spacing.spacing("tiny");
+
+  @include bp.respond-to("sm") {
+    display: flex;
+  }
+}
+
+.navLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: spacing.spacing("xtiny");
+
+  transition-property: color, background-color, border-color, outline-color,
+    text-decoration-color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+
+  min-width: 4rem;
+
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 400;
+  color: rgb(255 255 255 / 75%);
+  padding-inline: spacing.spacing("small");
+  padding-block: spacing.spacing("tiny");
+
+  &:hover {
+    background-color: rgb(255 255 255 / 8%);
+
+    color: #fff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(255 255 255 / 50%);
+  }
+
+  &[aria-current="location"] {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 10%);
+
+    background-color: rgb(255 255 255 / 8%);
+
+    color: #fff;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition-property: opacity;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  background-color: #000;
+
+  @include bp.respond-to("sm") {
+    display: none;
+  }
+}
+
+.overlayOpen {
+  opacity: 1;
+
+  pointer-events: auto;
+}
+
+.overlaySpacer {
+  flex-shrink: 0;
+
+  height: 7rem;
+}
+
+.overlayNav {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  justify-content: center;
+
+  padding-inline: spacing.spacing("large");
+
+  padding-bottom: spacing.spacing("xlarge");
+}
+
+.overlayList {
+  display: flex;
+  flex-direction: column;
+}
+
+.overlayItem {
+  transition-property: opacity, transform;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.overlayLink {
+  display: flex;
+  align-items: baseline;
+  gap: spacing.spacing("medium");
+
+  padding-block: spacing.spacing("medium");
+
+  &:focus-visible {
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 30%);
+    outline: none;
+  }
+
+  &:hover .overlayLabel {
+    color: #fff;
+  }
+}
+
+.overlayIndex {
+  width: 1.5rem;
+
+  font-size: 0.75rem;
+  line-height: 1;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  color: rgb(255 255 255 / 30%);
+  font-variant-numeric: tabular-nums;
+}
+
+.overlayLabel {
+  transition-property: color, background-color, border-color, outline-color,
+    text-decoration-color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  font-size: 2.5rem;
+  line-height: 1;
+  font-weight: 600;
+  color: rgb(255 255 255 / 70%);
+}
