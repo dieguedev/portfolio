@@ -166,12 +166,19 @@
 }
 
 .clientesRow {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   align-items: center;
+  justify-items: center;
 
   row-gap: spacing.spacing("medium");
   column-gap: spacing.spacing("large");
+  grid-template-columns: repeat(2, 1fr);
+
+  @include bp.respond-to("sm") {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: spacing.spacing("medium");
+  }
 }
 
 .clienteLogo {
