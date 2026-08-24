@@ -10,7 +10,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "serve out",
-    "lint": "eslint"
+    "lint": "eslint",
+    "stylelint": "stylelint \"src/**/*.{css,scss}\"",
+    "stylelint:fix": "stylelint \"src/**/*.{css,scss}\" --fix"
   },
   "dependencies": {
     "@boxicons/react": "1.0.3",
@@ -25,14 +27,16 @@
     "three": "0.184.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.103.1",
     "serve": "^14.2.6",
-    "tailwindcss": "^4",
+    "stylelint": "^17.14.1",
+    "stylelint-order": "^8.1.1",
     "typescript": "^5"
   }
 }

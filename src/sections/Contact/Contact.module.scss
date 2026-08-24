@@ -1,0 +1,44 @@
+@use "../../styles/utilities" as utils;
+@use "../../styles/breakpoints" as bp;
+@use "../../styles/spacing";
+
+.section {
+  @include utils.scroll-anchor;
+  @include utils.content-container;
+
+  padding-top: spacing.spacing("xlarge");
+  padding-bottom: spacing.spacing("large");
+
+  @include bp.respond-to("sm") {
+    padding-top: spacing.spacing("xlarge");
+    padding-bottom: spacing.spacing("xlarge");
+  }
+}
+
+.intro {
+  margin-bottom: spacing.spacing("large");
+
+  @include bp.respond-to("md") {
+    margin-bottom: spacing.spacing("xlarge");
+  }
+}
+
+.eyebrowHeading {
+  margin-bottom: spacing.spacing("medium");
+}
+
+.subtitle {
+  margin-top: spacing.spacing("medium");
+  max-width: 32rem;
+
+  color: rgb(255 255 255 / 70%);
+}
+
+.ctaGrid {
+  display: grid;
+  gap: spacing.spacing("small");
+
+  @include bp.respond-to("sm") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

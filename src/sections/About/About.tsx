@@ -1,0 +1,155 @@
+import { Code } from "@boxicons/react/Code";
+import { Devices } from "@boxicons/react/Devices";
+import { EditAlt } from "@boxicons/react/EditAlt";
+import { Lock } from "@boxicons/react/Lock";
+import { Palette } from "@boxicons/react/Palette";
+import { RocketAlt } from "@boxicons/react/RocketAlt";
+import cftLogo from "@/assets/cft.png";
+import lkLogo from "@/assets/lk.png";
+import starIcon from "@/assets/star.svg";
+import Carousel from "@/components/ui/Carousel/Carousel";
+import Text from "@/components/ui/Text/Text";
+import styles from "./About.module.scss";
+import SkillCard from "./components/SkillCard/SkillCard";
+
+const iconProps = {
+  size: "md",
+  color: "currentColor",
+  "aria-hidden": "true",
+} as const;
+
+const skills = [
+  { icon: <Palette {...iconProps} />, title: "Diseño a medida" },
+  { icon: <Devices {...iconProps} />, title: "Multidispositivo" },
+  { icon: <EditAlt {...iconProps} />, title: "Gestión sencilla" },
+  { icon: <RocketAlt {...iconProps} />, title: "Buen rendimiento" },
+  { icon: <Lock {...iconProps} />, title: "Web segura" },
+  { icon: <Code {...iconProps} />, title: "Código escalable" },
+];
+
+const clientes = [
+  { name: "Crypto Fund Trader", logo: cftLogo },
+  { name: "LK", logo: lkLogo },
+];
+
+const experiencia = [
+  {
+    role: "Front-end Developer",
+    company: "JAKALA Iberia",
+    period: "Ene. 24 — hoy.",
+  },
+  {
+    role: "Front-end Developer",
+    company: "Biko",
+    period: "Jul. 23 — Ene. 24.",
+  },
+  { role: "Developer Trainee", company: "Biko", period: "Mar. 23 — Jul. 23." },
+];
+
+export default function About() {
+  return (
+    <section id="about" className={styles.section} aria-labelledby="about-title">
+      <div className={styles.intro}>
+        <div className={styles.introHeading}>
+          <Text as="h2" variant="eyebrow" className={styles.eyebrowHeading}>
+            Acerca de
+          </Text>
+          <Text as="p" variant="title" id="about-title">
+            <Text as="span" variant="accent">
+              diegue
+            </Text>
+          </Text>
+        </div>
+
+        <blockquote className={styles.quote}>
+          <Text as="p" variant="body" className={styles.quoteText}>
+            Desarrollador web en{" "}
+            <strong className={styles.strongText}>Pamplona</strong>{" "}
+            especializado en React y TypeScript. Creo experiencias web rápidas,
+            accesibles y bien diseñadas para{" "}
+            <strong className={styles.strongText}>
+              empresas, startups y profesionales
+            </strong>{" "}
+            que buscan una{" "}
+            <strong className={styles.strongText}>
+              presencia digital sólida.
+            </strong>
+          </Text>
+        </blockquote>
+      </div>
+
+      <div className={styles.skillsSection} aria-labelledby="skills-title">
+        <Text as="h3" variant="subtitle" id="skills-title" className={styles.skillsHeading}>
+          Cada detalle, cubierto
+        </Text>
+        <Carousel>
+          {skills.map((skill) => (
+            <div key={skill.title} className={styles.skillItem}>
+              <SkillCard {...skill} />
+            </div>
+          ))}
+        </Carousel>
+      </div>
+
+      <div className={styles.experienciaSection} aria-labelledby="experiencia-title">
+        <Text
+          as="h3"
+          variant="subtitle"
+          id="experiencia-title"
+          className={styles.experienciaHeading}
+        >
+          Experiencia
+        </Text>
+        <div className={styles.timeline}>
+          <div className={styles.timelineLine} />
+
+          {experiencia.map((job, i) => {
+            const isLeft = i % 2 === 0;
+            return (
+              <div key={job.company + job.period} className={styles.row}>
+                <div
+                  className={isLeft ? styles.rowContentLeft : styles.rowContentRight}
+                >
+                  <p className={styles.period}>{job.period}</p>
+                  <Text as="p" variant="body" bold className={styles.role}>
+                    {job.role}
+                  </Text>
+                  <p className={styles.company}>{job.company}</p>
+                </div>
+                <div className={styles.starIconWrap}>
+                  <img
+                    src={starIcon.src}
+                    className={styles.starIcon}
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className={styles.clientesSection} aria-labelledby="clientes-title">
+        <Text
+          as="h3"
+          variant="subtitle"
+          id="clientes-title"
+          className={styles.clientesHeading}
+        >
+          Clientes destacados
+        </Text>
+        <div className={styles.clientesRow}>
+          {clientes.map((cliente) => (
+            <img
+              key={cliente.name}
+              src={cliente.logo.src}
+              alt={cliente.name}
+              className={styles.clienteLogo}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

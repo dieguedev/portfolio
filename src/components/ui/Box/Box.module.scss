@@ -1,0 +1,85 @@
+@use "../../../styles/spacing";
+
+.box {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.gapXtiny {
+  gap: spacing.spacing("xtiny");
+}
+
+.gapTiny {
+  gap: spacing.spacing("tiny");
+}
+
+.gapSmall {
+  gap: spacing.spacing("small");
+}
+
+.gapMedium {
+  gap: spacing.spacing("medium");
+}
+
+.gapLarge {
+  gap: spacing.spacing("large");
+}
+
+.gapXlarge {
+  gap: spacing.spacing("xlarge");
+}
+
+.alignStart {
+  align-items: flex-start;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.alignEnd {
+  align-items: flex-end;
+}
+
+.alignStretch {
+  align-items: stretch;
+}
+
+.alignBaseline {
+  align-items: baseline;
+}
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.justifyBetween {
+  justify-content: space-between;
+}
+
+.justifyAround {
+  justify-content: space-around;
+}
+
+.justifyEvenly {
+  justify-content: space-evenly;
+}

@@ -5,6 +5,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, wrapEffect } from "@react-three/postprocessing";
 import { Effect } from "postprocessing";
 import * as THREE from "three";
+import styles from "./HeroBackground.module.scss";
 
 const WAVE_SPEED = 0.05;
 const WAVE_FREQUENCY = 4;
@@ -192,7 +193,7 @@ function DitheredWaves() {
 export default function HeroBackground() {
   return (
     <Canvas
-      className="relative h-full w-full"
+      className={styles.canvas}
       camera={{ position: [0, 0, 6] }}
       frameloop="always"
       dpr={1}

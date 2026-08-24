@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import Menu from "@/components/Menu";
-import ClickSpark from "@/components/ui/ClickSpark";
-import "./globals.css";
+import Menu from "@/components/layout/Menu/Menu";
+import ClickSpark from "@/components/layout/ClickSpark/ClickSpark";
+import styles from "./layout.module.scss";
+import "./globals.scss";
 
 const montserrat = localFont({
   src: "../fonts/montserrat-latin-wght-normal.woff2",
@@ -11,11 +12,10 @@ const montserrat = localFont({
   display: "swap",
 });
 
-const cormorant = localFont({
-  src: "../fonts/cormorant-garamond-latin-600-italic.woff2",
-  weight: "600",
-  style: "italic",
-  variable: "--font-cormorant",
+const fraunces = localFont({
+  src: "../fonts/fraunces.ttf",
+  weight: "100 900",
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -41,10 +41,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${montserrat.variable} ${cormorant.variable}`}>
+    <html lang="es" className={`${montserrat.variable} ${fraunces.variable}`}>
       <body>
         <Menu />
-        <main className="min-h-svh bg-black text-white">{children}</main>
+        <main className={styles.main}>{children}</main>
         <ClickSpark
           sparkColor="#fff"
           sparkSize={10}

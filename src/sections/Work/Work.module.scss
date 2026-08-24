@@ -1,0 +1,5 @@
+@use "../../styles/utilities" as utils;
+
+.section {
+  @include utils.scroll-anchor;
+}
