@@ -1,0 +1,42 @@
+@use "../../../styles/spacing";
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: spacing.spacing("tiny");
+
+  margin-bottom: spacing.spacing("small");
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9999px;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  background-color: #fff;
+
+  color: #000;
+
+  &:disabled {
+    background-color: rgb(255 255 255 / 20%);
+    cursor: not-allowed;
+
+    color: rgb(255 255 255 / 40%);
+  }
+}
+
+.track {
+  display: flex;
+  gap: 1.25rem;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
