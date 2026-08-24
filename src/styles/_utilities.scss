@@ -64,6 +64,10 @@
   }
 }
 
+@mixin scroll-anchor {
+  scroll-margin-top: 7rem;
+}
+
 @mixin button-glass {
   @include glassmorphism;
   display: inline-flex;
