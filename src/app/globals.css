@@ -64,7 +64,3 @@ canvas {
 @utility eyebrow {
   @apply text-xs font-medium uppercase tracking-[0.28em] text-white/50;
 }
-
-@utility text-accent {
-  @apply font-display text-[1.12em] font-semibold;
-}
