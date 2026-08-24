@@ -1,4 +1,7 @@
 import { Code } from "@boxicons/react/Code";
+import { Devices } from "@boxicons/react/Devices";
+import { EditAlt } from "@boxicons/react/EditAlt";
+import { Lock } from "@boxicons/react/Lock";
 import { Palette } from "@boxicons/react/Palette";
 import { RocketAlt } from "@boxicons/react/RocketAlt";
 import starIcon from "@/assets/star.svg";
@@ -12,9 +15,12 @@ const iconProps = {
 } as const;
 
 const skills = [
-  { icon: <Code {...iconProps} />, title: "Código limpio" },
-  { icon: <Palette {...iconProps} />, title: "Diseño cuidado" },
-  { icon: <RocketAlt {...iconProps} />, title: "Rendimiento" },
+  { icon: <Palette {...iconProps} />, title: "Diseño a medida" },
+  { icon: <Devices {...iconProps} />, title: "Multidispositivo" },
+  { icon: <EditAlt {...iconProps} />, title: "Gestión sencilla" },
+  { icon: <RocketAlt {...iconProps} />, title: "Buen rendimiento" },
+  { icon: <Lock {...iconProps} />, title: "Web segura" },
+  { icon: <Code {...iconProps} />, title: "Código escalable" },
 ];
 
 const experiencia = [
@@ -70,7 +76,7 @@ export default function About() {
           id="skills-title"
           className="mb-6 text-[clamp(1.4rem,4vw,2rem)] font-semibold font-sans leading-[0.95] text-white"
         >
-          ¿Qué puedo aportar?
+          Cada detalle, cubierto
         </h3>
         <CardCarousel>
           {skills.map((skill) => (
