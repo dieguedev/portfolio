@@ -4,6 +4,8 @@ import { EditAlt } from "@boxicons/react/EditAlt";
 import { Lock } from "@boxicons/react/Lock";
 import { Palette } from "@boxicons/react/Palette";
 import { RocketAlt } from "@boxicons/react/RocketAlt";
+import cftLogo from "@/assets/cft.png";
+import lkLogo from "@/assets/lk.png";
 import starIcon from "@/assets/star.svg";
 import CardCarousel from "@/components/ui/CardCarousel";
 import SkillCard from "@/components/ui/SkillCard";
@@ -21,6 +23,11 @@ const skills = [
   { icon: <RocketAlt {...iconProps} />, title: "Buen rendimiento" },
   { icon: <Lock {...iconProps} />, title: "Web segura" },
   { icon: <Code {...iconProps} />, title: "Código escalable" },
+];
+
+const clientes = [
+  { name: "Crypto Fund Trader", logo: cftLogo },
+  { name: "LK", logo: lkLogo },
 ];
 
 const experiencia = [
@@ -138,6 +145,28 @@ export default function About() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      <div
+        className="mx-auto max-w-[920px] px-6 pb-14 sm:pb-24"
+        aria-labelledby="clientes-title"
+      >
+        <h3
+          id="clientes-title"
+          className="mb-10 text-[clamp(1.4rem,4vw,2rem)] font-semibold font-sans leading-[0.95] text-white"
+        >
+          Clientes destacados
+        </h3>
+        <div className="flex flex-wrap items-center gap-x-12 gap-y-6">
+          {clientes.map((cliente) => (
+            <img
+              key={cliente.name}
+              src={cliente.logo.src}
+              alt={cliente.name}
+              className="h-8 w-auto object-contain opacity-70 brightness-0 invert transition-opacity hover:opacity-100 sm:h-10"
+            />
+          ))}
         </div>
       </div>
     </section>
