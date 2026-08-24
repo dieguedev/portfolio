@@ -1,0 +1,13 @@
+@use "../../styles/utilities" as utils;
+
+.solid {
+  @include utils.button;
+}
+
+.glass {
+  @include utils.button-glass;
+}
+
+.fullWidth {
+  width: 100%;
+}

@@ -1,0 +1,18 @@
+@use "sass:map";
+
+$spacing: (
+  "xtiny": 0.25rem,
+  "tiny": 0.5rem,
+  "small": 1rem,
+  "medium": 1.5rem,
+  "large": 2.5rem,
+  "xlarge": 4rem,
+);
+
+@function spacing($step) {
+  @if not map.has-key($spacing, $step) {
+    @error "Unknown spacing step `#{$step}`. Available: #{map.keys($spacing)}.";
+  }
+
+  @return map.get($spacing, $step);
+}

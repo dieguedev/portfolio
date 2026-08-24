@@ -74,35 +74,3 @@ canvas {
 @utility text-accent {
   @apply font-display text-[1.12em] font-semibold;
 }
-
-@utility button {
-  @apply inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity duration-200 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50;
-}
-
-@utility button-glass {
-  @apply glassmorphism inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white/70 transition-colors duration-200 hover:bg-white/[0.12] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50;
-}
-
-@utility skill-card-surface {
-  background-image: var(--skill-card-texture);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-
-  &::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    opacity: var(--skill-card-pattern-opacity, 0.2);
-    pointer-events: none;
-
-    background-image: var(--skill-card-pattern);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    mix-blend-mode: overlay;
-  }
-}
