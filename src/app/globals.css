@@ -57,12 +57,6 @@ canvas {
   display: block;
 }
 
-@keyframes marquee {
-  to {
-    transform: translateX(calc(-100% / 6));
-  }
-}
-
 @utility glassmorphism {
   @apply border border-white/20 bg-white/[0.11] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5.2px];
 }
