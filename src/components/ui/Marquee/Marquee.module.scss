@@ -1,0 +1,61 @@
+@use "../../../styles/breakpoints" as bp;
+@use "../../../styles/spacing";
+
+.wrapper {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.track {
+  display: flex;
+  align-items: flex-start;
+
+  width: max-content;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: marquee 10.5s linear infinite;
+  }
+
+  @include bp.respond-to("sm") {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: marquee 13s linear infinite;
+    }
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: spacing.spacing("tiny");
+
+  margin-right: spacing.spacing("medium");
+  width: 7rem;
+  height: 5rem;
+
+  text-align: center;
+
+  @include bp.respond-to("sm") {
+    gap: spacing.spacing("small");
+
+    margin-right: spacing.spacing("large");
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-100% / 6));
+  }
+}
