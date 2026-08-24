@@ -28,6 +28,7 @@
           "right",
           "bottom",
           "left",
+          "scroll-margin-top",
           "container-type",
           "container-name",
           "display",

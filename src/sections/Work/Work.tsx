@@ -1,3 +1,5 @@
+import styles from "./Work.module.scss";
+
 export default function Work() {
-  return <section id="work" className="scroll-mt-28" aria-label="Trabajo" />;
+  return <section id="work" className={styles.section} aria-label="Trabajo" />;
 }
