@@ -1,5 +1,4 @@
 @use "spacing";
-@use "breakpoints" as bp;
 
 @mixin sr-only {
   position: absolute;
@@ -23,21 +22,6 @@
   background-color: rgb(255 255 255 / 11%);
   -webkit-backdrop-filter: blur(5.2px);
   backdrop-filter: blur(5.2px);
-}
-
-@mixin eyebrow {
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  color: rgb(255 255 255 / 50%);
-}
-
-@mixin text-accent {
-  font-size: 1.12em;
-  font-family: var(--font-fraunces), serif;
-  font-weight: 600;
 }
 
 @mixin button {
@@ -78,23 +62,6 @@
   padding-inline: spacing.spacing("medium");
 }
 
-@mixin display-title {
-  font-size: clamp(3rem, 12vw, 7rem);
-  line-height: 0.88;
-  font-weight: 600;
-  color: #fff;
-}
-
-@mixin body-copy {
-  font-size: 1rem;
-  line-height: 1.75rem;
-
-  @include bp.respond-to("sm") {
-    font-size: 1.05rem;
-    line-height: 2rem;
-  }
-}
-
 @mixin button-glass {
   @include glassmorphism;
   display: inline-flex;
@@ -109,7 +76,7 @@
 
   font-size: 0.875rem;
   line-height: 1.25rem;
-  font-weight: 500;
+  font-weight: 400;
   color: rgb(255 255 255 / 70%);
 
   &:hover {

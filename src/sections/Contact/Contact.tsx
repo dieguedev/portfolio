@@ -2,6 +2,7 @@ import { Envelope } from "@boxicons/react/Envelope";
 import { Linkedin } from "@boxicons/react/Linkedin";
 import { Whatsapp } from "@boxicons/react/Whatsapp";
 import Link from "@/components/ui/Link/Link";
+import Text from "@/components/ui/Text/Text";
 import styles from "./Contact.module.scss";
 
 const CONTACT_EMAIL = "contacto@diegue.dev";
@@ -15,11 +16,17 @@ export default function Contact() {
   return (
     <section id="contact" className={styles.section} aria-labelledby="contact-title">
       <div className={styles.intro}>
-        <h2 className={styles.eyebrowHeading}>Contacto</h2>
-        <p id="contact-title" className={styles.title}>
-          <span className={styles.accent}>Hablemos</span>
-        </p>
-        <p className={styles.subtitle}>Elige el canal que prefieras y hablamos.</p>
+        <Text as="h2" variant="eyebrow" className={styles.eyebrowHeading}>
+          Contacto
+        </Text>
+        <Text as="p" variant="title" id="contact-title">
+          <Text as="span" variant="accent">
+            Hablemos
+          </Text>
+        </Text>
+        <Text as="p" variant="body" className={styles.subtitle}>
+          Elige el canal que prefieras y hablamos.
+        </Text>
       </div>
 
       <div className={styles.ctaGrid}>
