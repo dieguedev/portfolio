@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import Menu from "@/components/Menu";
-import ClickSpark from "@/components/ClickSpark";
+import Menu from "@/components/layout/Menu/Menu";
+import ClickSpark from "@/components/layout/ClickSpark/ClickSpark";
 import "./globals.css";
 
 const montserrat = localFont({

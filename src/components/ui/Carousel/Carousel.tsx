@@ -4,11 +4,11 @@ import { ChevronLeft } from "@boxicons/react/ChevronLeft";
 import { ChevronRight } from "@boxicons/react/ChevronRight";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-interface CardCarouselProps {
+interface CarouselProps {
   children: ReactNode;
 }
 
-export default function CardCarousel({ children }: CardCarouselProps) {
+export default function Carousel({ children }: CarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);

@@ -1,13 +1,13 @@
 "use client";
 
 import { idleComponent } from "@/lib/useIdleComponent";
-import Loader from "@/components/Loader";
+import Loader from "@/components/ui/Loader/Loader";
 import diegue from "@/assets/diegue.svg";
 import logo from "@/assets/logo.svg";
 import styles from "./Hero.module.scss";
 
 const HeroBackground = idleComponent(
-  () => import("@/components/HeroBackground"),
+  () => import("./components/HeroBackground"),
 );
 
 export default function Hero() {
