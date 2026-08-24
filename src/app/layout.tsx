@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Menu from "@/components/layout/Menu/Menu";
 import ClickSpark from "@/components/layout/ClickSpark/ClickSpark";
-import "./globals.css";
+import styles from "./layout.module.scss";
+import "./globals.scss";
 
 const montserrat = localFont({
   src: "../fonts/montserrat-latin-wght-normal.woff2",
@@ -43,7 +44,7 @@ export default function RootLayout({
     <html lang="es" className={`${montserrat.variable} ${fraunces.variable}`}>
       <body>
         <Menu />
-        <main className="min-h-svh bg-black text-white">{children}</main>
+        <main className={styles.main}>{children}</main>
         <ClickSpark
           sparkColor="#fff"
           sparkSize={10}
