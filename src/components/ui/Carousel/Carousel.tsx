@@ -3,6 +3,7 @@
 import { ChevronLeft } from "@boxicons/react/ChevronLeft";
 import { ChevronRight } from "@boxicons/react/ChevronRight";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import styles from "./Carousel.module.scss";
 
 interface CarouselProps {
   children: ReactNode;
@@ -50,14 +51,14 @@ export default function Carousel({ children }: CarouselProps) {
 
   return (
     <div>
-      <div className="mb-4 flex justify-end gap-2">
+      <div className={styles.controls}>
         <button
           type="button"
           aria-label="Anterior"
           disabled={!canScrollLeft}
           suppressHydrationWarning
           onClick={() => scrollByCards(-1)}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black disabled:cursor-not-allowed disabled:bg-white/20 disabled:text-white/40"
+          className={styles.button}
         >
           <ChevronLeft size="sm" />
         </button>
@@ -67,16 +68,13 @@ export default function Carousel({ children }: CarouselProps) {
           disabled={!canScrollRight}
           suppressHydrationWarning
           onClick={() => scrollByCards(1)}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black disabled:cursor-not-allowed disabled:bg-white/20 disabled:text-white/40"
+          className={styles.button}
         >
           <ChevronRight size="sm" />
         </button>
       </div>
 
-      <div
-        ref={scrollRef}
-        className="flex gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
+      <div ref={scrollRef} className={styles.track}>
         {children}
       </div>
     </div>
