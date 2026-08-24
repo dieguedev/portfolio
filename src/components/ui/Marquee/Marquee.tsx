@@ -1,18 +1,19 @@
 import type { ReactNode } from "react";
 
-interface Tech {
-  name: string;
-  icon: ReactNode;
+interface MarqueeItem {
+  key: string;
+  content: ReactNode;
 }
 
-interface TechMarqueeProps {
-  tecnologias: Tech[];
+interface MarqueeProps {
+  items: MarqueeItem[];
+  ariaLabel: string;
 }
 
 const REPEAT_COUNT = 6;
 
-export default function TechMarquee({ tecnologias }: TechMarqueeProps) {
-  const items = Array.from({ length: REPEAT_COUNT }, () => tecnologias).flat();
+export default function Marquee({ items, ariaLabel }: MarqueeProps) {
+  const repeated = Array.from({ length: REPEAT_COUNT }, () => items).flat();
 
   return (
     <div
@@ -26,18 +27,15 @@ export default function TechMarquee({ tecnologias }: TechMarqueeProps) {
     >
       <ul
         className="flex w-max items-start motion-safe:[animation:marquee_10.5s_linear_infinite] sm:motion-safe:[animation:marquee_13s_linear_infinite]"
-        aria-label="Listado de tecnologías"
+        aria-label={ariaLabel}
       >
-        {items.map((tech, i) => (
+        {repeated.map((item, i) => (
           <li
-            key={`${tech.name}-${i}`}
+            key={`${item.key}-${i}`}
             className="mr-6 flex h-20 w-28 shrink-0 flex-col items-center justify-center gap-1.5 text-center sm:mr-10 sm:h-32 sm:w-32 sm:gap-3"
-            aria-hidden={i >= tecnologias.length ? "true" : undefined}
+            aria-hidden={i >= items.length ? "true" : undefined}
           >
-            <div className="[&>svg]:h-[26px] [&>svg]:w-[26px] sm:[&>svg]:h-[52px] sm:[&>svg]:w-[52px]">
-              {tech.icon}
-            </div>
-            <span className="eyebrow w-full">{tech.name}</span>
+            {item.content}
           </li>
         ))}
       </ul>

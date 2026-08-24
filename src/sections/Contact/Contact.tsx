@@ -1,7 +1,7 @@
 import { Envelope } from "@boxicons/react/Envelope";
 import { Linkedin } from "@boxicons/react/Linkedin";
 import { Whatsapp } from "@boxicons/react/Whatsapp";
-import Link from "@/components/Link/Link";
+import Link from "@/components/ui/Link/Link";
 
 const CONTACT_EMAIL = "contacto@diegue.dev";
 

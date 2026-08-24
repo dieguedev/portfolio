@@ -7,8 +7,8 @@ import { RocketAlt } from "@boxicons/react/RocketAlt";
 import cftLogo from "@/assets/cft.png";
 import lkLogo from "@/assets/lk.png";
 import starIcon from "@/assets/star.svg";
-import CardCarousel from "@/components/CardCarousel";
-import SkillCard from "@/components/SkillCard/SkillCard";
+import Carousel from "@/components/ui/Carousel/Carousel";
+import SkillCard from "./components/SkillCard/SkillCard";
 
 const iconProps = {
   size: "md",
@@ -85,7 +85,7 @@ export default function About() {
         >
           Cada detalle, cubierto
         </h3>
-        <CardCarousel>
+        <Carousel>
           {skills.map((skill) => (
             <div
               key={skill.title}
@@ -94,7 +94,7 @@ export default function About() {
               <SkillCard {...skill} />
             </div>
           ))}
-        </CardCarousel>
+        </Carousel>
       </div>
 
       <div

@@ -1,4 +1,4 @@
-import TechMarquee from "@/components/TechMarquee";
+import Marquee from "@/components/ui/Marquee/Marquee";
 import {
   TypescriptIcon,
   _React,
@@ -31,13 +31,25 @@ const tecnologias = [
   { name: "Astro", icon: <AstroIcon {...iconProps} /> },
 ];
 
+const items = tecnologias.map((tech) => ({
+  key: tech.name,
+  content: (
+    <>
+      <div className="[&>svg]:h-[26px] [&>svg]:w-[26px] sm:[&>svg]:h-[52px] sm:[&>svg]:w-[52px]">
+        {tech.icon}
+      </div>
+      <span className="eyebrow w-full">{tech.name}</span>
+    </>
+  ),
+}));
+
 export default function TechStrip() {
   return (
     <section
       className="border-y border-white/[0.08] bg-white/[0.03] py-4 sm:py-4"
       aria-label="Tecnologías"
     >
-      <TechMarquee tecnologias={tecnologias} />
+      <Marquee items={items} ariaLabel="Listado de tecnologías" />
     </section>
   );
 }
