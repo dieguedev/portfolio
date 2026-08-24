@@ -1,4 +1,4 @@
-import Hero from "@/sections/Hero";
+import Hero from "@/sections/Hero/Hero";
 import TechStrip from "@/sections/TechStrip";
 import About from "@/sections/About";
 import Work from "@/sections/Work";

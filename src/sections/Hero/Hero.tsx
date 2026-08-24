@@ -4,6 +4,7 @@ import { idleComponent } from "@/lib/useIdleComponent";
 import Loader from "@/components/Loader";
 import diegue from "@/assets/diegue.svg";
 import logo from "@/assets/logo.svg";
+import styles from "./Hero.module.scss";
 
 const HeroBackground = idleComponent(
   () => import("@/components/HeroBackground"),
@@ -11,36 +12,32 @@ const HeroBackground = idleComponent(
 
 export default function Hero() {
   return (
-    <section
-      id="home"
-      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-black"
-      aria-labelledby="home-title"
-    >
-      <div className="absolute inset-0 z-0" aria-hidden="true">
+    <section id="home" className={styles.section} aria-labelledby="home-title">
+      <div className={styles.backgroundContainer} aria-hidden="true">
         {HeroBackground && <HeroBackground />}
       </div>
 
-      <div className="absolute inset-0 z-[1] bg-black/70" />
+      <div className={styles.darkOverlay} />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[920px] flex-col items-center px-6 text-center text-white">
-        <h1 id="home-title" className="sr-only">
+      <div className={styles.content}>
+        <h1 id="home-title" className={styles.srOnly}>
           Diegue, desarrollador web en Pamplona
         </h1>
-        <p className="eyebrow mb-3 text-white/60 sm:text-sm" aria-hidden="true">
+        <p className={styles.eyebrow} aria-hidden="true">
           DESARROLLADOR FRONTEND
         </p>
-        <p className="mb-2 text-[clamp(3.5rem,15vw,8.5rem)] font-semibold leading-[0.85] tracking-normal text-white text-accent drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)] sm:mb-6">
+        <p className={styles.title}>
           <span>hola, soy</span>
           <br />
           <span>diegue</span>
         </p>
-        <p className="mt-5 max-w-[32rem] text-sm font-normal leading-6 text-white/80 sm:text-base sm:leading-7">
+        <p className={styles.subtitle}>
           Construyo experiencias web rápidas y accesibles utilizando React,
           TypeScript y una gran atención al detalle.
         </p>
       </div>
 
-      <div className="absolute bottom-20 z-10" aria-hidden="true">
+      <div className={styles.loaderWrap} aria-hidden="true">
         <Loader
           spinningIcon={diegue.src}
           centerIcon={logo.src}

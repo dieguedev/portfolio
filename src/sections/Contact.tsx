@@ -1,6 +1,7 @@
 import { Envelope } from "@boxicons/react/Envelope";
 import { Linkedin } from "@boxicons/react/Linkedin";
 import { Whatsapp } from "@boxicons/react/Whatsapp";
+import Link from "@/components/Link/Link";
 
 const CONTACT_EMAIL = "contacto@diegue.dev";
 
@@ -30,28 +31,30 @@ export default function Contact() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <a href={`mailto:${CONTACT_EMAIL}`} className="button-glass w-full">
+        <Link href={`mailto:${CONTACT_EMAIL}`} variant="glass" fullWidth>
           <Envelope width={22} height={22} fill="currentColor" aria-hidden="true" />
           {CONTACT_EMAIL}
-        </a>
-        <a
+        </Link>
+        <Link
           href="https://linkedin.com/in/diego-bogo/"
           target="_blank"
           rel="noopener noreferrer"
-          className="button-glass w-full"
+          variant="glass"
+          fullWidth
         >
           <Linkedin width={22} height={22} fill="currentColor" aria-hidden="true" />
           LinkedIn
-        </a>
-        <a
+        </Link>
+        <Link
           href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="button-glass w-full"
+          variant="glass"
+          fullWidth
         >
           <Whatsapp width={22} height={22} fill="currentColor" aria-hidden="true" />
           WhatsApp
-        </a>
+        </Link>
       </div>
     </section>
   );
