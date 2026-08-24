@@ -24,22 +24,10 @@
 }
 
 .eyebrowHeading {
-  @include utils.eyebrow;
-
   margin-bottom: spacing.spacing("medium");
 }
 
-.title {
-  @include utils.display-title;
-}
-
-.accent {
-  @include utils.text-accent;
-}
-
 .subtitle {
-  @include utils.body-copy;
-
   margin-top: spacing.spacing("medium");
   max-width: 32rem;
 

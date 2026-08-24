@@ -8,6 +8,7 @@ import cftLogo from "@/assets/cft.png";
 import lkLogo from "@/assets/lk.png";
 import starIcon from "@/assets/star.svg";
 import Carousel from "@/components/ui/Carousel/Carousel";
+import Text from "@/components/ui/Text/Text";
 import styles from "./About.module.scss";
 import SkillCard from "./components/SkillCard/SkillCard";
 
@@ -50,14 +51,18 @@ export default function About() {
     <section id="about" className={styles.section} aria-labelledby="about-title">
       <div className={styles.intro}>
         <div className={styles.introHeading}>
-          <h2 className={styles.eyebrowHeading}>Acerca de</h2>
-          <p id="about-title" className={styles.title}>
-            <span className={styles.accent}>diegue</span>
-          </p>
+          <Text as="h2" variant="eyebrow" className={styles.eyebrowHeading}>
+            Acerca de
+          </Text>
+          <Text as="p" variant="title" id="about-title">
+            <Text as="span" variant="accent">
+              diegue
+            </Text>
+          </Text>
         </div>
 
         <blockquote className={styles.quote}>
-          <p className={styles.quoteText}>
+          <Text as="p" variant="body" className={styles.quoteText}>
             Desarrollador web en{" "}
             <strong className={styles.strongText}>Pamplona</strong>{" "}
             especializado en React y TypeScript. Creo experiencias web rápidas,
@@ -69,14 +74,14 @@ export default function About() {
             <strong className={styles.strongText}>
               presencia digital sólida.
             </strong>
-          </p>
+          </Text>
         </blockquote>
       </div>
 
       <div className={styles.skillsSection} aria-labelledby="skills-title">
-        <h3 id="skills-title" className={styles.skillsHeading}>
+        <Text as="h3" variant="subtitle" id="skills-title" className={styles.skillsHeading}>
           Cada detalle, cubierto
-        </h3>
+        </Text>
         <Carousel>
           {skills.map((skill) => (
             <div key={skill.title} className={styles.skillItem}>
@@ -87,9 +92,14 @@ export default function About() {
       </div>
 
       <div className={styles.experienciaSection} aria-labelledby="experiencia-title">
-        <h3 id="experiencia-title" className={styles.experienciaHeading}>
+        <Text
+          as="h3"
+          variant="subtitle"
+          id="experiencia-title"
+          className={styles.experienciaHeading}
+        >
           Experiencia
-        </h3>
+        </Text>
         <div className={styles.timeline}>
           <div className={styles.timelineLine} />
 
@@ -101,7 +111,9 @@ export default function About() {
                   className={isLeft ? styles.rowContentLeft : styles.rowContentRight}
                 >
                   <p className={styles.period}>{job.period}</p>
-                  <p className={styles.role}>{job.role}</p>
+                  <Text as="p" variant="body" bold className={styles.role}>
+                    {job.role}
+                  </Text>
                   <p className={styles.company}>{job.company}</p>
                 </div>
                 <div className={styles.starIconWrap}>
@@ -119,9 +131,14 @@ export default function About() {
       </div>
 
       <div className={styles.clientesSection} aria-labelledby="clientes-title">
-        <h3 id="clientes-title" className={styles.clientesHeading}>
+        <Text
+          as="h3"
+          variant="subtitle"
+          id="clientes-title"
+          className={styles.clientesHeading}
+        >
           Clientes destacados
-        </h3>
+        </Text>
         <div className={styles.clientesRow}>
           {clientes.map((cliente) => (
             <img

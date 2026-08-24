@@ -87,12 +87,12 @@ export default function Menu() {
         >
           {isOpen ? (
             <span className="flex items-center gap-2">
-              <span className="text-sm font-medium">Cerrar</span>
+              <span className="text-sm font-normal">Cerrar</span>
               <CloseIcon width={22} height={22} fill="currentColor" aria-hidden="true" />
             </span>
           ) : (
             <span className="flex items-center gap-2">
-              <span className="text-sm font-medium">Menu</span>
+              <span className="text-sm font-normal">Menu</span>
               <MenuIcon width={22} height={22} fill="currentColor" aria-hidden="true" />
             </span>
           )}
@@ -104,7 +104,7 @@ export default function Menu() {
               <a
                 href={href}
                 aria-current={isActive(href) ? "location" : undefined}
-                className="flex min-w-16 flex-col items-center justify-center gap-1 rounded-xl border border-transparent px-3 py-2 text-xs font-medium text-white/75 transition-colors duration-200 hover:bg-white/[0.08] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50 aria-[current=location]:bg-white/[0.08] aria-[current=location]:text-white aria-[current=location]:shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                className="flex min-w-16 flex-col items-center justify-center gap-1 rounded-xl border border-transparent px-3 py-2 text-xs font-normal text-white/75 transition-colors duration-200 hover:bg-white/[0.08] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50 aria-[current=location]:bg-white/[0.08] aria-[current=location]:text-white aria-[current=location]:shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
               >
                 <Icon width={22} height={22} fill="currentColor" aria-hidden="true" />
                 <span>{label}</span>

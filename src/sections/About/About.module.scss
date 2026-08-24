@@ -2,14 +2,6 @@
 @use "../../styles/breakpoints" as bp;
 @use "../../styles/spacing";
 
-@mixin section-heading {
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  line-height: 0.95;
-  font-family: var(--font-montserrat), sans-serif;
-  font-weight: 600;
-  color: #fff;
-}
-
 .section {
   @include utils.scroll-anchor;
 }
@@ -25,21 +17,7 @@
 }
 
 .eyebrowHeading {
-  @include utils.eyebrow;
-
   margin-bottom: spacing.spacing("medium");
-}
-
-.title {
-  font-size: clamp(3rem, 12vw, 7rem);
-  line-height: 0.88;
-  font-weight: 600;
-  letter-spacing: normal;
-  color: #fff;
-}
-
-.accent {
-  @include utils.text-accent;
 }
 
 .quote {
@@ -48,14 +26,7 @@
 }
 
 .quoteText {
-  font-size: 1rem;
-  line-height: 1.75rem;
   color: rgb(255 255 255 / 80%);
-
-  @include bp.respond-to("sm") {
-    font-size: 1.05rem;
-    line-height: 2rem;
-  }
 }
 
 .strongText {
@@ -70,8 +41,6 @@
 }
 
 .skillsHeading {
-  @include section-heading;
-
   margin-bottom: spacing.spacing("medium");
 }
 
@@ -89,8 +58,6 @@
 }
 
 .experienciaHeading {
-  @include section-heading;
-
   margin-bottom: spacing.spacing("medium");
 }
 
@@ -174,14 +141,7 @@
 }
 
 .role {
-  font-size: 0.875rem;
-  line-height: 1.25;
-  font-weight: 700;
   color: #fff;
-
-  @include bp.respond-to("md") {
-    font-size: 1.125rem;
-  }
 }
 
 .company {
@@ -202,8 +162,6 @@
 }
 
 .clientesHeading {
-  @include section-heading;
-
   margin-bottom: spacing.spacing("large");
 }
 

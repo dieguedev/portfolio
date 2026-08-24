@@ -51,16 +51,9 @@
 }
 
 .eyebrow {
-  @include utils.eyebrow;
-
   margin-bottom: spacing.spacing("small");
 
   color: rgb(255 255 255 / 60%);
-
-  @include bp.respond-to("sm") {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
 }
 
 .title {
@@ -84,15 +77,7 @@
   margin-top: spacing.spacing("medium");
   max-width: 32rem;
 
-  font-size: 0.875rem;
-  line-height: 1.5rem;
-  font-weight: 400;
   color: rgb(255 255 255 / 80%);
-
-  @include bp.respond-to("sm") {
-    font-size: 1rem;
-    line-height: 1.75rem;
-  }
 }
 
 .loaderWrap {
