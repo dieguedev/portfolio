@@ -1,0 +1,21 @@
+@use "sass:map";
+
+$colors: (
+  "black": #000,
+  "gray": #ccc,
+  "white": #fff,
+);
+
+@function color($token, $alpha: 1) {
+  @if not map.has-key($colors, $token) {
+    @error "Unknown color token `#{$token}`. Available: #{map.keys($colors)}.";
+  }
+
+  $value: map.get($colors, $token);
+
+  @if $alpha == 1 {
+    @return $value;
+  }
+
+  @return rgba($value, $alpha);
+}

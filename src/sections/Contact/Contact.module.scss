@@ -1,6 +1,7 @@
 @use "../../styles/utilities" as utils;
 @use "../../styles/breakpoints" as bp;
 @use "../../styles/spacing";
+@use "../../styles/colors";
 
 .section {
   @include utils.scroll-anchor;
@@ -31,7 +32,7 @@
   margin-top: spacing.spacing("medium");
   max-width: 32rem;
 
-  color: rgb(255 255 255 / 70%);
+  color: colors.color("gray");
 }
 
 .ctaGrid {

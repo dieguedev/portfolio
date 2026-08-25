@@ -1,6 +1,7 @@
 @use "../../styles/utilities" as utils;
 @use "../../styles/breakpoints" as bp;
 @use "../../styles/spacing";
+@use "../../styles/colors";
 
 .section {
   position: relative;
@@ -13,7 +14,7 @@
 
   min-height: 100svh;
 
-  background-color: #000;
+  background-color: colors.color("black");
 }
 
 .backgroundContainer {
@@ -39,7 +40,7 @@
   align-items: center;
 
   text-align: center;
-  color: #fff;
+  color: colors.color("white");
 }
 
 .srOnly {
@@ -49,20 +50,25 @@
 .eyebrow {
   margin-bottom: spacing.spacing("small");
 
-  color: rgb(255 255 255 / 60%);
+  font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+  line-height: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: colors.color("gray");
 }
 
 .title {
-  filter: drop-shadow(0 12px 32px rgb(0 0 0 / 45%));
-
   margin-bottom: spacing.spacing("tiny");
 
-  font-size: clamp(3.5rem, 15vw, 8.5rem);
+  font-size: clamp(4.5rem, 15vw, 8.5rem);
   line-height: 0.85;
   font-family: var(--font-fraunces), serif;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 144;
   font-weight: 600;
   letter-spacing: normal;
-  color: #fff;
+  color: colors.color("white");
 
   @include bp.respond-to("sm") {
     margin-bottom: spacing.spacing("medium");
@@ -73,7 +79,14 @@
   margin-top: spacing.spacing("medium");
   max-width: 32rem;
 
-  color: rgb(255 255 255 / 80%);
+  font-size: 1rem;
+  line-height: 1.75rem;
+  color: colors.color("gray");
+
+  @include bp.respond-to("sm") {
+    font-size: 1.05rem;
+    line-height: 2rem;
+  }
 }
 
 .loaderWrap {

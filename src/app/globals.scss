@@ -1,3 +1,5 @@
+@use "../styles/colors";
+
 *,
 ::before,
 ::after {
@@ -8,12 +10,12 @@
 }
 
 html {
-  background: #000;
+  background: colors.color("black");
 
   line-height: 1.5;
 
   font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
-  color: #fff;
+  color: colors.color("white");
   -webkit-text-size-adjust: 100%;
   tab-size: 4;
   -webkit-tap-highlight-color: transparent;
@@ -29,9 +31,9 @@ html {
 body {
   min-height: 100svh;
 
-  background: #000;
+  background: colors.color("black");
 
-  color: #fff;
+  color: colors.color("white");
 }
 
 h1,

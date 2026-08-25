@@ -1,4 +1,5 @@
 @use "../../../styles/spacing";
+@use "../../../styles/colors";
 
 .controls {
   display: flex;
@@ -17,15 +18,15 @@
   width: 2.5rem;
   height: 2.5rem;
 
-  background-color: #fff;
+  background-color: colors.color("white");
 
-  color: #000;
+  color: colors.color("black");
 
   &:disabled {
     background-color: rgb(255 255 255 / 20%);
     cursor: not-allowed;
 
-    color: rgb(255 255 255 / 40%);
+    color: colors.color("gray");
   }
 }
 

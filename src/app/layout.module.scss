@@ -1,7 +1,9 @@
+@use "../styles/colors";
+
 .main {
   min-height: 100svh;
 
-  background-color: #000;
+  background-color: colors.color("black");
 
-  color: #fff;
+  color: colors.color("white");
 }

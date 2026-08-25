@@ -1,6 +1,7 @@
 @use "../../styles/utilities" as utils;
 @use "../../styles/breakpoints" as bp;
 @use "../../styles/spacing";
+@use "../../styles/colors";
 
 .section {
   @include utils.scroll-anchor;
@@ -26,12 +27,12 @@
 }
 
 .quoteText {
-  color: rgb(255 255 255 / 80%);
+  color: colors.color("gray");
 }
 
 .strongText {
   font-weight: 600;
-  color: #fff;
+  color: colors.color("white");
 }
 
 .skillsSection {
@@ -137,18 +138,18 @@
   line-height: 1rem;
   font-variant-numeric: tabular-nums;
 
-  color: rgb(255 255 255 / 40%);
+  color: colors.color("gray");
 }
 
 .role {
-  color: #fff;
+  color: colors.color("white");
 }
 
 .company {
   margin-top: spacing.spacing("xtiny");
 
   font-size: 0.75rem;
-  color: rgb(255 255 255 / 55%);
+  color: colors.color("gray");
 
   @include bp.respond-to("md") {
     font-size: 0.875rem;
