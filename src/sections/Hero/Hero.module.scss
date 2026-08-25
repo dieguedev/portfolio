@@ -31,16 +31,12 @@
 }
 
 .content {
+  @include utils.content-container;
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  width: 100%;
-  max-width: 920px;
-  margin-inline: auto;
-  padding-inline: spacing.spacing("medium");
 
   text-align: center;
   color: #fff;

@@ -57,9 +57,21 @@
 
 @mixin content-container {
   width: 100%;
-  max-width: 920px;
+  max-width: 1200px;
   margin-inline: auto;
   padding-inline: spacing.spacing("medium");
+}
+
+@mixin breakout-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: spacing.spacing("medium");
+}
+
+@mixin full-bleed {
+  width: 100%;
+  padding-inline: 0;
 }
 
 @mixin button-glass {
